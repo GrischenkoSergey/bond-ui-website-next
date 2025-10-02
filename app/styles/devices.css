@@ -1,0 +1,978 @@
+/* ============================================
+   RESPONSIVE STYLES - Media Queries
+   ============================================ */
+
+/* ============================================
+   DESKTOP (1151px and up)
+   ============================================ */
+
+@media only screen and (min-width: 1151px) {
+    #mobile-view {
+        display: none;
+    }
+
+    .image-wrapper {
+        right: 0;
+        top: 0;
+    }
+
+    .slide-image {
+        width: 100%;
+        height: 253px;
+        display: block;
+        object-fit: cover;
+    }
+}
+
+/* ============================================
+   TABLET & MOBILE (1150px and down)
+   ============================================ */
+
+@media only screen and (max-width: 1150px) {
+
+    /* Header Adjustments */
+    header #logo img {
+        max-width: 50vw;
+        height: auto;
+    }
+
+    header {
+        justify-content: space-between;
+    }
+
+    #heading {
+        margin-left: 20px;
+    }
+
+    /* Hide Desktop Hero */
+    .sectionhead {
+        display: none;
+    }
+
+    /* Mobile Container */
+    .container {
+        min-height: auto;
+    }
+
+    /* Mobile Navigation */
+    .scrollmenu {
+        flex-direction: column;
+        display: none;
+    }
+
+    .scrollmenu.show {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        width: 280px;
+        background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        border-radius: 12px;
+        box-shadow: 0 0 11px 0 #aaaaaa;
+        z-index: 1000;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        animation: slideInFromTop 0.3s ease-out;
+    }
+
+    div.scrollmenu.show a,
+    div.scrollmenu.show .theme-toggle-btn {
+        text-align: left;
+        padding: 15px 20px;
+        margin: 0;
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        font-size: 1.1rem;
+        font-family: "ADLaM Display", sans-serif;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);
+        border: none;
+        cursor: pointer;
+        padding: 12px 15px;
+        color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        line-height: 1;
+    }
+
+    .menu-toggle:hover {
+        background: linear-gradient(135deg, #4a0e4e 0%, #28013e 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .scrollmenu a {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    /* Mobile Header Text */
+    .mobile-header-text {
+        background: radial-gradient(circle at 50% 100%, #50bafc, #031a46);
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .mobile-header-text h1:first-child {
+        font-size: 2.3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .sectionheadtext {
+        width: 100%;
+    }
+
+    .sectionheadtext h1 {
+        font-size: 2rem;
+        color: #3c3c00;
+        font-weight: bold;
+    }
+
+    .sectionheadtext h2 {
+        font-size: 1.5em;
+    }
+
+    /* Mobile Sections */
+    .sectionrow {
+        display: flex;
+        width: calc(100% - 30px);
+        max-width: 100%;
+        margin: 20px auto;
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 15px;
+        align-items: center;
+    }
+
+    .section {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        flex-direction: column;
+        display: flex;
+        align-items: stretch;
+        background-color: #efeeee;
+        box-shadow: 0 0 11px 0 #aaaaaa;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .image-wrapper,
+    .sub-section {
+        width: 100%;
+    }
+
+    /* Mobile Images */
+    .image-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: auto;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        display: block;
+        background-color: #efeeee;
+        width: 100%;
+        line-height: 0;
+    }
+
+    .image-wrapper img.slide-image,
+    .image-wrapper img.slide-image2 {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        display: block;
+        vertical-align: top;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .image-wrapper.fill-mode img.slide-image,
+    .image-wrapper.fill-mode img.slide-image2 {
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .image-container {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        display: block;
+        line-height: 0;
+        background-color: #efeeee;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        max-width: 100%;
+        vertical-align: top;
+    }
+
+    /* Mobile Sub-sections */
+    .sub-section {
+        background-color: #28013e;
+        transition: background-color 1s ease;
+        height: auto;
+        min-height: 200px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .sub-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #ffff66;
+    }
+
+    .sub-section p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    /* Mobile Footer */
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    footer #copy {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Mobile Manual Pages */
+    main .sectionmanual h1 {
+        font-size: 1.5rem;
+        margin: 20px 15px 15px 15px;
+    }
+
+    main .sectionmanual h2 {
+        font-size: 1.3rem;
+        margin: 25px 15px 15px 15px;
+    }
+
+    .sectionmanual ul {
+        margin: 0 15px 20px 15px;
+        padding-left: 0;
+    }
+
+    .sectionmanual ul li {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .sectionmanual ul li strong {
+        display: inline-block;
+    }
+
+    .sectionmanual ul ul {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .sectionmanual p {
+        margin: 0 15px 15px 15px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .sectionmanual .manualdownloadaddin {
+        margin: 10px 15px 20px 15px;
+    }
+
+    .manual-image-container {
+        margin: 15px 0;
+        padding: 0 15px;
+    }
+
+    .manual-image-container img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .manual-tips {
+        padding: 20px 15px;
+        margin: 20px 15px;
+    }
+
+    .manual-tips h2 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .manual-tips p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+    /* Mobile Buy Now Page */
+    .buy-now-section {
+        margin: 20px 15px;
+    }
+
+    .buy-now-section h1 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+
+    .buy-now-section p {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .buy-now-features {
+        margin: 15px 15px 25px 15px;
+    }
+
+    .buy-now-features li {
+        font-size: 1.1rem;
+        padding: 6px 0;
+    }
+
+    .buynowbar {
+        flex-direction: column;
+        padding: 20px 15px;
+        gap: 15px;
+    }
+
+    .buynowbar p {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Mobile Program Picker */
+    .program-picker-intro,
+    .program-picker-features,
+    .program-picker-details,
+    .program-picker-cta {
+        margin-bottom: 20px;
+    }
+
+    .program-picker-intro h2,
+    .program-picker-features h2,
+    .program-picker-details h2 {
+        font-size: 1.3rem;
+        margin: 20px 15px 15px 15px;
+    }
+
+    .program-picker-intro p,
+    .program-picker-details p {
+        margin: 0 15px 15px 15px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .program-picker-features .feature-list {
+        margin: 0 15px;
+    }
+
+    .program-picker-features .feature-list li {
+        font-size: 1.1rem;
+        padding: 12px 0;
+    }
+
+    .program-picker-cta {
+        margin: 20px 15px;
+        padding: 15px;
+    }
+
+    .program-picker-cta p {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE (560px and down)
+   ============================================ */
+
+@media screen and (max-width: 560px) {
+    .buynowbar {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .sectionrow {
+        padding: 0 10px;
+    }
+
+    .image-wrapper {
+        min-height: 200px;
+    }
+
+    .sub-section {
+        padding: 15px;
+        min-height: 150px;
+    }
+
+    .sub-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .sub-section p {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   EXTRA SMALL MOBILE (600px and down)
+   ============================================ */
+
+@media only screen and (max-width: 600px) {
+    main .sectionmanual h1 {
+        font-size: 1.3rem;
+        margin: 15px 10px 10px 10px;
+    }
+
+    main .sectionmanual h2 {
+        font-size: 1.2rem;
+        margin: 20px 10px 10px 10px;
+    }
+
+    .sectionmanual ul {
+        margin: 0 10px 15px 10px;
+    }
+
+    .sectionmanual ul li {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    .sectionmanual ul li strong {
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .sectionmanual p {
+        margin: 0 10px 12px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .sectionmanual .manualdownloadaddin {
+        margin: 10px 10px 15px 10px;
+        max-width: 100%;
+    }
+
+    .manual-image-container {
+        padding: 0 10px;
+    }
+
+    .manual-tips {
+        padding: 15px 10px;
+        margin: 15px 10px;
+    }
+
+    .manual-tips h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .manual-tips p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .buy-now-section {
+        margin: 15px 10px;
+    }
+
+    .buy-now-section h1 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+
+    .buy-now-section p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .buy-now-features {
+        margin: 12px 10px 20px 10px;
+    }
+
+    .buy-now-features li {
+        font-size: 1rem;
+        padding: 5px 0;
+        line-height: 1.5;
+    }
+
+    .buynowbar {
+        padding: 15px 10px;
+        gap: 12px;
+    }
+
+    .buynowbar p {
+        font-size: 1rem;
+    }
+
+    .program-picker-intro,
+    .program-picker-features,
+    .program-picker-details,
+    .program-picker-cta {
+        margin-bottom: 15px;
+    }
+
+    .program-picker-intro h2,
+    .program-picker-features h2,
+    .program-picker-details h2 {
+        font-size: 1.2rem;
+        margin: 15px 10px 10px 10px;
+    }
+
+    .program-picker-intro p,
+    .program-picker-details p {
+        margin: 0 10px 12px 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .program-picker-features .feature-list {
+        margin: 0 10px;
+    }
+
+    .program-picker-features .feature-list li {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+
+    .program-picker-features .feature-list li:hover {
+        padding-left: 5px;
+    }
+
+    .program-picker-cta {
+        margin: 15px 10px;
+        padding: 12px;
+    }
+
+    .program-picker-cta p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .sectionmanual ul ul {
+        margin-left: 15px;
+    }
+}
+
+/* ============================================
+   MEDIUM MOBILE (400px - 599px)
+   ============================================ */
+
+@media screen and (min-width: 400px) and (max-width: 599px) {
+    .sectionrow {
+        width: calc(100% - 30px);
+        padding: 0 15px;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .image-wrapper {
+        min-height: 220px;
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width: 599px) {
+    .sectionrow {
+        width: calc(100% - 30px);
+        padding: 0 15px;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .image-wrapper {
+        min-height: unset;
+    }
+}
+
+/* ============================================
+   VERY SMALL MOBILE (399px and down)
+   ============================================ */
+
+@media screen and (max-width: 399px) {
+    .sectionrow {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .image-wrapper {
+        min-height: 200px;
+    }
+
+    .sub-section {
+        padding: 15px;
+        min-height: 150px;
+    }
+
+    .sub-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .sub-section p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .sectionrow {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+        gap: 30px;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .image-wrapper {
+        min-height: unset;
+        height: auto;
+        background-color: #efeeee;
+    }
+
+    .image-wrapper img.slide-image,
+    .image-wrapper img.slide-image2 {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .sub-section {
+        padding: 15px;
+        min-height: 150px;
+    }
+
+    .sub-section h2 {
+        font-size: 1.1rem;
+    }
+
+    .sub-section p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .scrollmenu.show {
+        width: calc(100vw - 20px);
+        right: 10px;
+        left: 10px;
+    }
+
+    .sectionrow {
+        width: calc(100% - 16px);
+        padding: 0 8px;
+    }
+
+    .image-wrapper {
+        min-height: unset;
+        background-color: #efeeee;
+    }
+
+    .sub-section {
+        padding: 12px;
+        min-height: 120px;
+    }
+
+    .sub-section h2 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .sub-section p {
+        font-size: 0.9rem;
+        line-height: 1.3;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .scrollmenu.show {
+        width: 260px;
+        right: 10px;
+    }
+
+    div.scrollmenu.show a,
+    div.scrollmenu.show .theme-toggle-btn {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   TABLET PORTRAIT (600px - 900px)
+   ============================================ */
+
+@media screen and (min-width: 600px) and (max-width: 900px) and (orientation: portrait) {
+    .sectionrow {
+        width: calc(100% - 40px);
+        padding: 0 20px;
+    }
+
+    .section {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .image-wrapper {
+        min-height: unset;
+    }
+
+    .sub-section {
+        padding: 25px;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MODE (1150px and down)
+   ============================================ */
+
+@media (orientation: landscape) and (max-width: 1150px) {
+    .sectionrow {
+        margin: 20px auto;
+        padding: 0 20px;
+        align-items: center;
+    }
+
+    .section {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        align-items: stretch;
+    }
+
+    .image-wrapper {
+        min-height: 200px;
+        max-height: 50vh;
+    }
+
+    .image-wrapper img.slide-image,
+    .image-wrapper img.slide-image2 {
+        max-height: 50vh;
+        width: 100%;
+        height: auto;
+    }
+
+    .sub-section {
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1151px) {
+
+    .scrollmenu.show a,
+    .scrollmenu.show .theme-toggle-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1150px) and (orientation: landscape) {
+    .sectionrow {
+        width: calc(100% - 40px);
+        padding: 0 20px;
+        gap: 30px;
+    }
+
+    .section {
+        width: 100%;
+        max-width: 410px;
+        margin: 0 auto;
+    }
+
+    .image-wrapper {
+        min-height: unset;
+        max-height: none;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .image-wrapper img.slide-image,
+    .image-wrapper img.slide-image2 {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: none;
+        object-fit: contain;
+    }
+
+    .sub-section {
+        padding: 20px;
+        min-height: 180px;
+    }
+
+    .manual-image-container {
+        max-width: 90%;
+        margin: 15px auto;
+    }
+
+    .manual-image-container img {
+        max-height: 70vh;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .program-picker-intro p,
+    .program-picker-details p,
+    .program-picker-cta p {
+        line-height: 1.5;
+    }
+
+    .program-picker-features .feature-list li {
+        padding: 8px 0;
+    }
+
+    .manual-tips {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .manual-tips p {
+        line-height: 1.5;
+    }
+
+    .sectionmanual ul li {
+        line-height: 1.5;
+    }
+
+    .buy-now-section {
+        margin: 15px;
+    }
+
+    .buy-now-section p,
+    .buy-now-features li {
+        line-height: 1.5;
+    }
+}
+
+/* ============================================
+   SHORT LANDSCAPE SCREENS (500px height and down)
+   ============================================ */
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .scrollmenu.show {
+        top: 60px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    div.scrollmenu.show a,
+    div.scrollmenu.show .theme-toggle-btn {
+        padding: 10px 15px;
+        font-size: 0.95rem !important;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        min-height: 40px;
+    }
+}
+
+@media screen and (max-height: 400px) and (orientation: landscape) {
+    .scrollmenu.show {
+        top: 50px;
+        max-height: calc(100vh - 70px);
+        border-radius: 8px;
+    }
+
+    div.scrollmenu.show a,
+    div.scrollmenu.show .theme-toggle-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem !important;
+        line-height: 1.3;
+        display: flex;
+        align-items: center;
+        min-height: 32px;
+    }
+
+    div.scrollmenu.show a:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    div.scrollmenu.show a:last-child,
+    div.scrollmenu.show .theme-toggle-btn:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}
+
+@media screen and (min-height: 501px) and (max-height: 800px) and (orientation: landscape) {
+    .scrollmenu.show {
+        top: 80px;
+        max-height: calc(100vh - 100px);
+    }
+
+    div.scrollmenu.show a,
+    div.scrollmenu.show .theme-toggle-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        font-size: 1.1rem !important;
+    }
+}
+
+/* ============================================
+   ORIENTATION CHANGE FIXES
+   ============================================ */
+
+@media screen and (orientation: portrait) {
+    .section {
+        width: 100% !important;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .section {
+        width: 100% !important;
+    }
+}

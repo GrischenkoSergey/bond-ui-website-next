@@ -1,0 +1,299 @@
+/* ============================================
+   LAYOUT STYLES - Structure & Containers
+   ============================================ */
+
+/* Main Container */
+.container {
+    max-width: 1400px;
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 8px 0;
+    color: #000;
+}
+
+.dark header {
+    color: #fff;
+}
+
+/* Logo Styles */
+header #logo,
+header #logo2 {
+    display: flex;
+    align-items: center;
+}
+
+header #logo {
+    display: none;
+}
+
+header #logo2 {
+    display: flex;
+    align-items: center;
+}
+
+.dark header #logo {
+    display: flex;
+    align-items: center;
+}
+
+.dark header #logo2 {
+    display: none;
+}
+
+header #logo a,
+header #logo2 a {
+    margin: 0 0 0 30px;
+}
+
+header #logo a:hover,
+header #logo a:active,
+header #logo2 a:hover,
+header #logo2 a:active {
+    margin: 3px 0 0 32px;
+}
+
+/* Header Heading */
+header #heading {
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+}
+
+header #heading p {
+    font: bold 1rem Arial, Sans-serif;
+    color: #000;
+    margin: 0 0 4px;
+}
+
+.dark header #heading p {
+    color: #fff;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.scrollmenu {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5vw;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #000;
+    transition: color 1s ease;
+    text-align: center;
+    text-decoration: none;
+    font-family: "ADLaM Display", sans-serif;
+    font-size: 1.1rem;
+}
+
+.dark div.scrollmenu a {
+    color: #fff;
+}
+
+/* Active Page Link Underlines */
+#home a.homelink,
+#addinmanual a.addinmanuallink,
+#programpicker a.programpickerlink,
+#ppmanual a.ppmanuallink,
+#support a.supportlink,
+#buynow a.buynowlink,
+#terms a.termslink,
+#privacypolicy a.privacypolicylink,
+#privacynotice a.privacynoticelink,
+#refundpolicy a.refundpolicylink {
+    text-decoration: underline;
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle {
+    display: none;
+}
+
+/* Mobile Menu Dropdown */
+div.scrollmenu.show {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 280px;
+    background: linear-gradient(135deg, #eee6c6 0%, #f5f0d6 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 11px 0 #aaaaaa;
+    z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+.dark div.scrollmenu.show {
+    background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+div.scrollmenu.show a,
+div.scrollmenu.show .theme-toggle-btn {
+    text-align: left;
+    padding: 15px 20px;
+    margin: 0;
+    color: #000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    font-size: 1.1rem;
+    font-family: "ADLaM Display", sans-serif;
+}
+
+.dark div.scrollmenu.show a,
+.dark div.scrollmenu.show .theme-toggle-btn {
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+div.scrollmenu.show a:hover,
+div.scrollmenu.show .theme-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #3c3c00;
+    text-decoration: none;
+    transform: translateX(5px);
+}
+
+.dark div.scrollmenu.show a:hover,
+.dark div.scrollmenu.show .theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f8ff2d;
+}
+
+div.scrollmenu.show a:last-child,
+div.scrollmenu.show .theme-toggle-btn:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+div.scrollmenu.show a:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+main {
+    flex: 1;
+    padding: 15px;
+    background-color: #e7f4fc;
+    transition: background-color 1s ease;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    z-index: 0;
+}
+
+.dark main {
+    background-color: #031a46;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 3vh 0;
+    background: url("/images/footerbacklight.png") 0 -10px;
+    background-color: #e7f4fc;
+    transition: background 1s ease;
+}
+
+.dark footer {
+    background: url("/images/footerback.png") 0 -10px;
+    background-color: #031a46;
+}
+
+footer a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 100;
+    transition: color 1s ease;
+}
+
+.dark footer a {
+    color: #fff;
+}
+
+footer li {
+    margin: 0 0 4px 0;
+    font-size: 1.3em;
+}
+
+footer #copy {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    font-family: "ADLaM Display", sans-serif;
+    margin: 0 20px 0 0;
+}
+
+footer #copy img {
+    margin: 0 20px 0 0;
+}
+
+footer .copybox2 {
+    display: none;
+}
+
+footer #asp {
+    flex: 1;
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+#footernav {
+    display: flex;
+    flex: 1;
+    margin: 25px 5px 25px 0;
+    color: #fff;
+    justify-content: center;
+}
+
+#footernav ul {
+    display: flex;
+    flex-direction: column;
+    font-family: "ADLaM Display", sans-serif;
+}

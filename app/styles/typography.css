@@ -1,0 +1,144 @@
+/* ============================================
+   TYPOGRAPHY STYLES
+   ============================================ */
+
+/* Main Content Typography */
+main h1,
+main h2,
+main p {
+    margin-bottom: 0.5vh;
+}
+
+main h1 {
+    font-size: 1.8rem;
+}
+
+main h2 {
+    font-size: 1.4rem;
+    color: #3c3c00;
+    transition: color 1s ease;
+}
+
+.dark main h2 {
+    color: #ffff66;
+}
+
+main h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+main p {
+    font-size: 1.2rem;
+}
+
+/* List Styles */
+main ul {
+    margin-bottom: 20px;
+}
+
+main li {
+    font-size: 1.3rem;
+    color: #045f97;
+}
+
+.dark main li {
+    color: #50bafc;
+}
+
+main li:before {
+    font-family: "Webdings";
+    content: "=  ";
+}
+
+main li:hover {
+    text-decoration: underline;
+}
+
+/* Link Styles */
+main a {
+    color: #045f97;
+    font-size: 1.3rem;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.dark main a {
+    color: #50bafc;
+}
+
+/* ============================================
+   MANUAL PAGE TYPOGRAPHY
+   ============================================ */
+
+main .sectionmanual h1 {
+    font-size: 1.7rem;
+    margin: 30px 0 20px 30px;
+}
+
+main .sectionmanual h2 {
+    font-size: 1.6rem;
+    margin: 30px 0 0 30px;
+}
+
+.sectionmanual ul {
+    margin: 0 0 30px 30px;
+}
+
+.sectionmanual ul li strong {
+    color: #045f97;
+    font-weight: 600;
+}
+
+.dark .sectionmanual ul li strong {
+    color: #50bafc;
+}
+
+.sectionmanual ul li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.sectionmanual p {
+    margin: 0 30px 10px 30px;
+}
+
+/* ============================================
+   SECTION HEAD TYPOGRAPHY
+   ============================================ */
+
+.sectionheadtext h1 {
+    font-size: 2.1rem;
+    color: #3c3c00;
+    font-weight: bold;
+}
+
+.dark .sectionheadtext h1 {
+    color: #ffff66;
+}
+
+.sectionheadtext h2 {
+    font-size: 1.7rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.dark .sectionheadtext h2 {
+    color: #fff;
+}
+
+.sectionheadtext h2.price {
+    color: #ffff66;
+    font-size: 2.2em;
+}
+
+.sectionheadtext p {
+    font-size: 1.3rem;
+    margin: 10px;
+}
+
+/* Price Typography */
+main h2.price {
+    font-size: 2.5em;
+    color: #f8ff2d;
+}

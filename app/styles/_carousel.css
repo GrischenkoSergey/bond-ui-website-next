@@ -1,0 +1,603 @@
+/* ============================================
+   CAROUSEL STYLES - Image Slider Component
+   ============================================ */
+
+/* ============================================
+   DESKTOP CAROUSEL
+   ============================================ */
+
+.carousel {
+    position: relative;
+    width: 1024px;
+    height: 630px;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   CAROUSEL SLIDES
+   ============================================ */
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 630px;
+    object-fit: cover;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* ============================================
+   CAROUSEL NAVIGATION BUTTONS
+   ============================================ */
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 200;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+/* ============================================
+   CAROUSEL THUMBNAILS
+   ============================================ */
+
+.carousel-thumbnails-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+}
+
+.carousel-thumbnails {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 10px;
+    z-index: 100;
+    left: 50%;
+    transform: translate(-50%);
+    transition: transform 0.3s ease;
+    padding: 0 10px;
+}
+
+.carousel-thumbnails img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.carousel-thumbnails img.active-thumb {
+    opacity: 1;
+    border-color: #333;
+}
+
+/* ============================================
+   CAROUSEL DESCRIPTIONS
+   ============================================ */
+
+.description-item-container {
+    position: relative;
+    margin-top: -10px;
+}
+
+.description-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    line-height: 1.15;
+}
+
+.description-item.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.sectionhead .description-item {
+    font-size: 1.4rem;
+}
+
+/* ============================================
+   SLIDE ANIMATIONS
+   ============================================ */
+
+/* Fade Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade.active {
+    animation: fadeIn 1s ease;
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in.active {
+    animation: slideIn 1s ease;
+}
+
+/* Break Effect Animation */
+@keyframes breakEffect {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+.break.active {
+    animation: breakEffect 1s ease;
+}
+
+/* Dust Effect Animation */
+@keyframes dustEffect {
+    0% {
+        filter: blur(10px) brightness(2);
+        opacity: 0;
+    }
+
+    100% {
+        filter: blur(0) brightness(1);
+        opacity: 1;
+    }
+}
+
+.dust.active {
+    animation: dustEffect 1s ease;
+}
+
+/* Zoom Animation */
+@keyframes zoomEffect {
+    from {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.zoom.active {
+    animation: zoomEffect 1s ease;
+}
+
+/* Rotate In Animation */
+@keyframes rotateIn {
+    from {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.rotate.active {
+    animation: rotateIn 1s ease;
+}
+
+/* Flip In Animation */
+@keyframes flipIn {
+    from {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+.flip.active {
+    animation: flipIn 1s ease;
+}
+
+/* Skew Animation */
+@keyframes skewIn {
+    0% {
+        transform: skewX(20deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: skewX(0);
+        opacity: 1;
+    }
+}
+
+.skew.active {
+    animation: skewIn 1s ease;
+}
+
+/* Rotate Up Animation */
+@keyframes rotateUp {
+    0% {
+        transform: rotate(-15deg) translateY(30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0) translateY(0);
+        opacity: 1;
+    }
+}
+
+.rotate-up.active {
+    animation: rotateUp 1s ease;
+}
+
+/* Bounce Animation */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounce.active {
+    animation: bounceIn 1s ease;
+}
+
+/* ============================================
+   MOBILE CAROUSEL (1151px and down)
+   ============================================ */
+
+.carousel-mobile {
+    position: relative;
+    box-shadow: 1px 2px 2px 2px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    overflow: hidden;
+    /* Set fixed height for mobile carousel*/
+    height: 60vh;
+}
+
+@media only screen and (max-width: 1151px) {
+
+    /* Mobile Carousel Buttons */
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+    }
+
+    .carousel-mobile .carousel-btn {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        z-index: 200;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-mobile .carousel-btn.prev {
+        left: 10px;
+    }
+
+    .carousel-mobile .carousel-btn.next {
+        right: 10px;
+    }
+
+    .carousel-mobile .carousel-btn:hover {
+        background: rgba(0, 0, 0, 0.8);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Mobile Thumbnails */
+    .carousel-thumbnails img {
+        width: 60px;
+        height: 40px;
+    }
+
+    /* Mobile Carousel Container */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+    }
+
+    /* Fixed carousel track to properly display slides */
+    .carousel-container .carousel-track {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Mobile-specific slide class that doesn't conflict with desktop .slide */
+    .mobile-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 1s ease;
+        pointer-events: none;
+    }
+
+    /* Active mobile slides are visible */
+    .mobile-slide.active {
+        opacity: 1;
+        z-index: 2;
+        pointer-events: auto;
+    }
+
+    /* ImagePreview wrapper must fill the mobile slide container */
+    .mobile-slide>div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Images constrained to fit within carousel-track container */
+    .mobile-slide img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+    /* Description container has fixed height */
+    .description-item-container {
+        position: relative;
+        background-color: white;
+        display: flex;
+        width: 100%;
+        height: 200px;
+        flex-shrink: 0;
+    }
+
+    .description-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        opacity: 0;
+        transition: opacity 1s ease;
+        color: #000;
+        overflow-y: auto;
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .carousel-functions .carousel-thumbnails {
+        bottom: 160px;
+    }
+}
+
+/* ============================================
+   MOBILE LANDSCAPE MODE
+   ============================================ */
+
+@media (orientation: landscape) and (max-width: 1151px) {
+
+    /* Description container smaller in landscape */
+    .description-item-container {
+        position: relative;
+        background-color: white;
+        display: flex;
+        width: 100%;
+        height: 150px;
+        flex-shrink: 0;
+    }
+
+    .description-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        opacity: 0;
+        transition: opacity 1s ease;
+        color: #000;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        line-height: 1.1;
+    }
+
+    .description-item.active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .carousel-thumbnails img {
+        width: 60px;
+        height: 40px;
+    }
+
+    .carousel-mobile .carousel-btn {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        z-index: 200;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Carousel container fills available space in landscape */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+    }
+
+    .carousel-container .carousel-track {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Mobile slide styles for landscape mode */
+    .mobile-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 1s ease;
+        pointer-events: none;
+    }
+
+    .mobile-slide.active {
+        opacity: 1;
+        z-index: 2;
+        pointer-events: auto;
+    }
+
+    .mobile-slide>div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Images constrained to fit within carousel-track in landscape mode */
+    .mobile-slide img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+
+    .carousel-functions .carousel-thumbnails {
+        bottom: 160px;
+    }
+
+    body {
+        padding-right: env(safe-area-inset-right, 16px);
+    }
+}

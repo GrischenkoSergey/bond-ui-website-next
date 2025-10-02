@@ -1,0 +1,610 @@
+/* ============================================
+   MOBILE CAROUSEL CONTAINER
+   ============================================ */
+
+/* Main mobile carousel wrapper - fixed height with shadow and rounded corners */
+.carousel-mobile {
+    position: relative;
+    box-shadow: 1px 2px 2px 2px;
+    border-radius: 10px;
+    height: 60vh;
+    /* Fixed height for consistent mobile experience */
+    margin-top: 20px;
+    overflow: hidden;
+    /* Prevents content overflow */
+}
+
+/* ============================================
+   DESKTOP CAROUSEL CONTAINER
+   ============================================ */
+
+/* Desktop carousel with fixed dimensions matching typical slide aspect ratio */
+.carousel {
+    position: relative;
+    width: 1024px;
+    height: 630px;
+    overflow: hidden;
+}
+
+/* ============================================
+   CAROUSEL TRACK (SLIDE CONTAINER)
+   ============================================ */
+
+/* Container for all slides - uses flexbox for layout */
+.carousel-track {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   SLIDE STYLES
+   ============================================ */
+
+/* Individual slide - absolutely positioned for stacking and fade transitions */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* Hidden by default */
+    transition: opacity 1s ease;
+    /* Smooth fade transition */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slide images - cover entire slide area */
+.slide img {
+    width: 100%;
+    height: 630px;
+    object-fit: cover;
+    /* Fills space while maintaining aspect ratio */
+}
+
+/* Active slide - visible and on top */
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+    /* Ensures active slide appears above others */
+}
+
+/* ============================================
+   SLIDE ANIMATIONS
+   ============================================ */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade.active {
+    animation: fadeIn 1s ease;
+}
+
+/* Slide In Animation - enters from right */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in.active {
+    animation: slideIn 1s ease;
+}
+
+/* Break Effect - scale and rotate */
+@keyframes breakEffect {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+.break.active {
+    animation: breakEffect 1s ease;
+}
+
+/* Dust Effect - blur and brightness transition */
+@keyframes dustEffect {
+    0% {
+        filter: blur(10px) brightness(2);
+        opacity: 0;
+    }
+
+    100% {
+        filter: blur(0) brightness(1);
+        opacity: 1;
+    }
+}
+
+.dust.active {
+    animation: dustEffect 1s ease;
+}
+
+/* Zoom Effect - scales from large to normal */
+@keyframes zoomEffect {
+    from {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.zoom.active {
+    animation: zoomEffect 1s ease;
+}
+
+/* Rotate In - 3D Y-axis rotation */
+@keyframes rotateIn {
+    from {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.rotate.active {
+    animation: rotateIn 1s ease;
+}
+
+/* Flip In - 3D X-axis rotation */
+@keyframes flipIn {
+    from {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+.flip.active {
+    animation: flipIn 1s ease;
+}
+
+/* Skew In - horizontal skew transition */
+@keyframes skewIn {
+    0% {
+        transform: skewX(20deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: skewX(0);
+        opacity: 1;
+    }
+}
+
+.skew.active {
+    animation: skewIn 1s ease;
+}
+
+/* Rotate Up - combined rotation and translation */
+@keyframes rotateUp {
+    0% {
+        transform: rotate(-15deg) translateY(30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0) translateY(0);
+        opacity: 1;
+    }
+}
+
+.rotate-up.active {
+    animation: rotateUp 1s ease;
+}
+
+/* Bounce In - elastic scale effect */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounce.active {
+    animation: bounceIn 1s ease;
+}
+
+/* ============================================
+   CAROUSEL THUMBNAILS
+   ============================================ */
+
+/* Thumbnail navigation - centered at bottom of carousel */
+.carousel-thumbnails {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 10px;
+    z-index: 100;
+    left: 50%;
+    transform: translate(-50%);
+    /* Centers horizontally */
+}
+
+/* Individual thumbnail images */
+.carousel-thumbnails img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    /* Dimmed when not active */
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Active thumbnail - highlighted */
+.carousel-thumbnails img.active-thumb {
+    opacity: 1;
+    border-color: #333;
+}
+
+/* ============================================
+   NAVIGATION BUTTONS
+   ============================================ */
+
+/* Previous/Next buttons - circular with semi-transparent background */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    /* Vertically centers button */
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 200;
+    /* Above slides and thumbnails */
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+/* ============================================
+   THUMBNAIL WRAPPER (SCROLLABLE)
+   ============================================ */
+
+/* Wrapper for scrollable thumbnail navigation */
+.carousel-thumbnails-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+}
+
+/* Scrollable thumbnail container */
+.carousel-thumbnails {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.3s ease;
+    /* Smooth scroll animation */
+    padding: 0 10px;
+}
+
+.carousel-thumbnails img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    /* Prevents thumbnails from shrinking */
+}
+
+.carousel-thumbnails img.active-thumb {
+    opacity: 1;
+    border-color: #333;
+}
+
+/* ============================================
+   DESCRIPTION CONTAINER
+   ============================================ */
+
+/* Container for slide descriptions - positioned below carousel */
+.description-item-container {
+    position: relative;
+}
+
+/* Individual description items - fade transition like slides */
+.description-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* Hidden by default */
+    transition: opacity 1s ease;
+    /* Matches slide transition */
+}
+
+/* Active description - visible */
+.description-item.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Larger font for section headers */
+.sectionhead .description-item {
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES (Portrait)
+   ============================================ */
+
+@media only screen and (max-width: 1151px) {
+
+    /* Smaller buttons for mobile */
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+    }
+
+    /* Smaller thumbnails for mobile */
+    .carousel-thumbnails img {
+        width: 60px;
+        height: 40px;
+    }
+
+    /* Carousel container - height calculated to leave room for description (200px) */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: calc(60vh - 200px);
+        /* 60vh total - 200px for description */
+        overflow: hidden;
+        /* Prevents scrolling, ensures proper button positioning */
+    }
+
+    /* Mobile-specific button positioning - centered vertically within image area */
+    .carousel-mobile .carousel-btn {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+        top: 50%;
+        /* Positions at vertical center */
+        transform: translateY(-50%);
+        /* Offsets by half height for true centering */
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        z-index: 200;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    /* Images fill container completely - no gaps */
+    .carousel-container .carousel-track img {
+        background-position: top left;
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel-mobile .carousel-btn.prev {
+        left: 10px;
+    }
+
+    .carousel-mobile .carousel-btn.next {
+        right: 10px;
+    }
+
+    /* Button hover effect - maintains centering while scaling */
+    .carousel-mobile .carousel-btn:hover {
+        background: rgba(0, 0, 0, 0.8);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Description container - fixed 200px height below carousel */
+    .description-item-container {
+        position: relative;
+        background-color: white;
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Description text - scrollable if content overflows */
+    .description-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        opacity: 0;
+        transition: opacity 1s ease;
+        color: #000;
+        overflow-y: auto;
+        /* Allows scrolling for long descriptions */
+        font-size: 1rem;
+        line-height: 1.4;
+        /* Improved readability */
+    }
+
+    /* Thumbnail positioning for function carousel */
+    .carousel-functions .carousel-thumbnails {
+        bottom: 160px;
+    }
+
+    /* Mobile slide - simplified display */
+    .slide {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: block;
+        transition: opacity 1s ease;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE STYLES
+   ============================================ */
+
+@media (orientation: landscape) and (max-width: 1151px) {
+
+    /* Taller carousel for landscape orientation */
+    .carousel-mobile {
+        height: 95vh;
+        /* Uses more vertical space in landscape */
+    }
+
+    .carousel-thumbnails img {
+        width: 60px;
+        height: 40px;
+    }
+
+    /* Carousel container - adjusted for landscape with smaller description area */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: calc(95vh - 150px);
+        /* 95vh total - 150px for description */
+        overflow: hidden;
+    }
+
+    /* Landscape button positioning - same centering logic */
+    .carousel-mobile .carousel-btn {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        z-index: 200;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Landscape images - auto width to fit height, centered horizontally */
+    .carousel-container .carousel-track img {
+        background-position: top left;
+        width: auto;
+        height: 100%;
+    }
+
+    /* Smaller description area in landscape */
+    .description-item-container {
+        position: relative;
+        background-color: white;
+        display: flex;
+        width: 100%;
+        height: 150px;
+        /* Reduced from 200px for landscape */
+    }
+
+    /* Landscape description text - slightly smaller font */
+    .description-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        opacity: 0;
+        transition: opacity 1s ease;
+        color: #000;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        /* Smaller for landscape */
+        line-height: 1.3;
+    }
+
+    .description-item.active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .carousel-functions .carousel-thumbnails {
+        bottom: 160px;
+    }
+
+    /* Landscape slide - centered content */
+    .slide {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: block;
+        transition: opacity 1s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Safe area padding for notched devices */
+    body {
+        padding-right: env(safe-area-inset-right, 16px);
+    }
+}
