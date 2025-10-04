@@ -2,6 +2,7 @@
 
 import Layout from "@/components/Layout"
 import { useEffect } from "react"
+import Image from "next/image"
 
 export default function AddinManual() {
   useEffect(() => {
@@ -61,7 +62,13 @@ export default function AddinManual() {
         <p>You will see the Bond Add In when you next open a document in Word.</p>
         <p>The Ribbon is initially hidden, in &apos;Show tabs only&apos; mode.</p>
         <div className="manual-image-container">
-          <img src="/images/manual1.gif" alt="The Ribbon is hidden in 'Tabs only mode' initially." />
+          <Image
+            src="/images/manual1.gif"
+            alt="The Ribbon is hidden in 'Tabs only mode' initially."
+            width={800}
+            height={450}
+            unoptimized
+          />
         </div>
         <p>
           To access Ribbon commands with the mouse, click on the tab title, such as &apos;Insert&apos;,
@@ -72,7 +79,13 @@ export default function AddinManual() {
           corner of the Ribbon, to access the Ribbon display menu. Then click on &apos;Always shown Ribbon&apos;.
         </p>
         <div className="manual-image-container">
-          <img src="/images/manual2.gif" alt="Click on down arrow. Click on 'Always show Ribbon'." />
+          <Image
+            src="/images/manual2.gif"
+            alt="Click on down arrow. Click on 'Always show Ribbon'."
+            width={800}
+            height={450}
+            unoptimized
+          />
         </div>
         <p>
           To hide the Ribbon again, click on any Ribbon tab, click on the down arrow in the lower right corner, and
@@ -94,7 +107,7 @@ export default function AddinManual() {
           Ribbon.
         </p>
         <div className="manual-image-container">
-          <img src="/images/manual3.gif" alt="Drop down menu." />
+          <Image src="/images/manual3.gif" alt="Drop down menu." width={800} height={450} unoptimized />
         </div>
 
         <div id="dialogue" className="anchor-section">
@@ -102,11 +115,11 @@ export default function AddinManual() {
         </div>
         <p>Press the function key of the command you want to use.</p>
         <div className="manual-image-container">
-          <img src="/images/DialogueBox1.gif" alt="Dialogue Box." />
+          <Image src="/images/dialoguebox1.gif" alt="Dialogue Box." width={800} height={450} unoptimized />
         </div>
         <p>Multi toggle buttons - press the function key repeatedly until you have selected the option you want.</p>
         <div className="manual-image-container">
-          <img src="/images/multitoggle.gif" alt="Multi toggle button." />
+          <Image src="/images/multitoggle.gif" alt="Multi toggle button." width={800} height={450} unoptimized />
         </div>
         <p>Press F12 to move to the next sub window.</p>
         <p>
@@ -114,7 +127,7 @@ export default function AddinManual() {
           window.
         </p>
         <div className="manual-image-container">
-          <img src="/images/DialogueBox2.gif" alt="Dialogue Box." />
+          <Image src="/images/dialoguebox2.gif" alt="Dialogue Box." width={800} height={450} unoptimized />
         </div>
 
         <div id="qcb" className="anchor-section">
@@ -125,14 +138,20 @@ export default function AddinManual() {
           QCBs.
         </p>
         <div className="manual-image-container">
-          <img src="/images/SelectQCB.gif" alt="Select Quick Command Bars." />
+          <Image src="/images/selectqcb.gif" alt="Select Quick Command Bars." width={800} height={450} unoptimized />
         </div>
         <p>
           Hold down the function key of the QCB you want to edit. The &apos;Edit Custom Quick Command Bar&apos; window
           will open.
         </p>
         <div className="manual-image-container">
-          <img src="/images/EditCustom.gif" alt="Edit Custom Quick Command Bar." />
+          <Image
+            src="/images/editcustom.gif"
+            alt="Edit Custom Quick Command Bar."
+            width={800}
+            height={450}
+            unoptimized
+          />
         </div>
 
         <div id="kddm" className="anchor-section">

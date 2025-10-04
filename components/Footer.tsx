@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 
 const Footer = () => {
   return (
@@ -57,11 +58,11 @@ const Footer = () => {
 
       <div id="copy">
         <div className="copybox">
-          <img src="images/logosmallwhite.png" width="150" height="27" alt="Bond Logo" />
+          <Image src="/images/logosmallwhite.webp" width={150} height={27} alt="Bond Logo" />
         </div>
 
         <div className="copybox2">
-          <img src="images/logosmallblack.png" width="150" height="27" alt="Bond Logo" />
+          <Image src="/images/logosmallblack.webp" width={150} height={27} alt="Bond Logo" />
         </div>
 
         <div className="copyboxdetails">

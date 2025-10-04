@@ -68,7 +68,7 @@ body.light-theme div.scrollmenu a {
 
 /* Light Theme - Footer */
 body.light-theme footer {
-    background: url("/images/footerbacklight.png") 0 -10px;
+    background: url("/images/footerbacklight.webp") 0 -10px;
     background-color: #e7f4fc;
     transition: background 1s ease;
 }

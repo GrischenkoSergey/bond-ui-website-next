@@ -67,7 +67,7 @@
     height: 630px;
     overflow: hidden;
     display: flex;
-    background: url("/images/banner.jpg");
+    background: url("/images/banner.webp");
     border-radius: 10px;
     box-shadow: 0 0 7px 3px #8e8e8e;
 }
@@ -169,7 +169,7 @@
 .buynow:hover {
     width: 314px;
     height: 61px;
-    background: url(/images/buynow2499.png);
+    background: url(/images/buynow2499.webp);
     display: block;
     text-indent: -9999px;
     border: none;
@@ -177,7 +177,7 @@
 }
 
 .buynow:hover {
-    background: url(/images/buynow2499.png) 0 -61px;
+    background: url(/images/buynow2499.webp) 0 -61px;
 }
 
 /* Buy Now Button - $14.99 (Program Picker) */
@@ -185,7 +185,7 @@
 .buynowpp:hover {
     width: 287px;
     height: 54px;
-    background: url(/images/buynow1499.png);
+    background: url(/images/buynow1499.webp);
     display: block;
     text-indent: -9999px;
     border: none;
@@ -193,7 +193,7 @@
 }
 
 .buynowpp:hover {
-    background: url(/images/buynow1499.png) 0 -54px;
+    background: url(/images/buynow1499.webp) 0 -54px;
 }
 
 /* Download Add-in Button */
@@ -202,7 +202,7 @@
 .manualdownloadaddin {
     width: 314px;
     height: 61px;
-    background: url(/images/addindownload.png);
+    background: url(/images/addindownload.webp);
     display: block;
     text-indent: -9999px;
     border: none;
@@ -211,7 +211,7 @@
 
 .downloadaddin:hover,
 .manualdownloadaddin:hover {
-    background: url(/images/addindownload.png) 0 -61px;
+    background: url(/images/addindownload.webp) 0 -61px;
 }
 
 /* ============================================

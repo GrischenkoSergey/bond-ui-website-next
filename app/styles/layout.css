@@ -231,13 +231,13 @@ footer {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 3vh 0;
-    background: url("/images/footerbacklight.png") 0 -10px;
+    background: url("/images/footerbacklight.webp") 0 -10px;
     background-color: #e7f4fc;
     transition: background 1s ease;
 }
 
 .dark footer {
-    background: url("/images/footerback.png") 0 -10px;
+    background: url("/images/footerback.webp") 0 -10px;
     background-color: #031a46;
 }
 

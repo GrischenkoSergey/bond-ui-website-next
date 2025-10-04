@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "next-themes"
 
 const Header = () => {
@@ -96,13 +96,13 @@ const Header = () => {
       <header>
         <div id="logo">
           <Link href="/">
-            <img src="./images/logowhite.png" width="230" height="44" alt="Bond Logo" />
+            <Image src="/images/logowhite.webp" width={230} height={44} alt="Bond Logo" />
           </Link>
         </div>
 
         <div id="logo2">
           <Link href="/">
-            <img src="./images/logoblack.png" width="230" height="44" alt="Bond Logo" />
+            <Image src="/images/logoblack.webp" width={230} height={44} alt="Bond Logo" />
           </Link>
         </div>
 
