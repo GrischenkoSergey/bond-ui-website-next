@@ -136,7 +136,7 @@ div.scrollmenu.show {
     top: 90px;
     right: 20px;
     width: 280px;
-    background: linear-gradient(135deg, #eee6c6 0%, #f5f0d6 100%);
+    background: linear-gradient(135deg, oklch(0.94 0.005 250), oklch(85.073% 0.00479 258.591));
     display: flex;
     flex-direction: column;
     padding: 0;

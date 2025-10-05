@@ -369,6 +369,7 @@
 /* Container for slide descriptions - positioned below carousel */
 .description-item-container {
     position: relative;
+    margin-top: -10px;
 }
 
 /* Individual description items - fade transition like slides */
@@ -379,13 +380,14 @@
     opacity: 0;
     /* Hidden by default */
     transition: opacity 1s ease;
-    /* Matches slide transition */
+    line-height: 1.2;
 }
 
 /* Active description - visible */
 .description-item.active {
     opacity: 1;
     z-index: 2;
+    line-height: 1.2;
 }
 
 /* Larger font for section headers */
@@ -486,8 +488,7 @@
         overflow-y: auto;
         /* Allows scrolling for long descriptions */
         font-size: 1rem;
-        line-height: 1.4;
-        /* Improved readability */
+        line-height: 1.2;
     }
 
     /* Thumbnail positioning for function carousel */
@@ -578,8 +579,7 @@
         color: #000;
         overflow-y: auto;
         font-size: 0.9rem;
-        /* Smaller for landscape */
-        line-height: 1.3;
+        line-height: 1.1;
     }
 
     .description-item.active {
