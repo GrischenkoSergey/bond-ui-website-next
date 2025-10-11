@@ -90,9 +90,9 @@ const ImagePreview = ({
 
   return (
     <>
-      <div onClick={showPreview} style={{ cursor: "pointer", width: "100%", height: "auto" }}>
+      <div onClick={showPreview} style={{ cursor: "pointer", width: "100%", height: isMobile ? "100%" : "auto" }}>
         {children}
-      </div>
+      </div >
 
       {isVisible && isPreviewEnabled && (
         <>
@@ -159,7 +159,8 @@ const ImagePreview = ({
             />
           </div>
         </>
-      )}
+      )
+      }
     </>
   )
 }

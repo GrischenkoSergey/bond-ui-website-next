@@ -11,12 +11,16 @@
     flex-direction: column;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+/* Added header-wrapper to constrain header width to match body */
+.header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 header {
     width: 100%;
+    max-width: 1400px;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -130,6 +134,14 @@ div.scrollmenu a {
     display: none;
 }
 
+.dark .menu-toggle {
+    background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);
+}
+
+.dark.menu-toggle:hover {
+    background: linear-gradient(135deg, #4a0e4e 0%, #28013e 100%);
+}
+
 /* Mobile Menu Dropdown */
 div.scrollmenu.show {
     position: fixed;
@@ -159,7 +171,7 @@ div.scrollmenu.show .theme-toggle-btn {
     padding: 15px 20px;
     margin: 0;
     color: #000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
     text-decoration: none;
     font-weight: 500;

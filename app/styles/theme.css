@@ -64,6 +64,11 @@
     color: oklch(0.45 0.15 250);
 }
 
+:root div.scrollmenu.show a,
+:root div.scrollmenu.show .theme-toggle-btn {
+    color: rgb(60, 60, 0);
+}
+
 /* ============================================
    DARK THEME OVERRIDES
    ============================================ */
@@ -112,6 +117,11 @@
 /* Dark Theme - Buy Now Features */
 .dark .buy-now-features li:before {
     color: oklch(0.65 0.22 250);
+}
+
+.dark div.scrollmenu.show a,
+.dark div.scrollmenu.show .theme-toggle-btn {
+    color: #fff;
 }
 
 /* ============================================

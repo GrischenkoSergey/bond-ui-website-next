@@ -386,7 +386,7 @@
 /* Active description - visible */
 .description-item.active {
     opacity: 1;
-    z-index: 2;
+    /* z-index: 2; */
     line-height: 1.2;
 }
 
@@ -551,10 +551,10 @@
         align-items: center;
     }
 
-    /* Landscape images - auto width to fit height, centered horizontally */
+    /* Landscape images - auto width and height, centered horizontally */
     .carousel-container .carousel-track img {
         background-position: top left;
-        width: auto;
+        width: 100%;
         height: 100%;
     }
 
@@ -564,7 +564,7 @@
         background-color: white;
         display: flex;
         width: 100%;
-        height: 150px;
+        height: 100%;
         /* Reduced from 200px for landscape */
     }
 
@@ -584,7 +584,7 @@
 
     .description-item.active {
         opacity: 1;
-        z-index: 2;
+        /* z-index: 2; */
     }
 
     .carousel-functions .carousel-thumbnails {

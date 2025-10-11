@@ -112,14 +112,14 @@ const Home = () => {
     setCurrent((prev) => (prev - 1 + total) % total)
   }, [total])
 
-  // useEffect(() => {
-  //   if (!autoPlay || total <= 1) return
+  useEffect(() => {
+    if (!autoPlay || total <= 1) return
 
-  //   const interval = setInterval(nextSlide, autoPlayInterval)
-  //   return () => clearInterval(interval)
-  // }, [autoPlay, autoPlayInterval, nextSlide, total])
+    const interval = setInterval(nextSlide, autoPlayInterval)
+    return () => clearInterval(interval)
+  }, [autoPlay, autoPlayInterval, nextSlide, total])
 
-  // if (!carouselSlides.length) return null
+  if (!carouselSlides.length) return null
 
   return (
     <Layout pageId="home">
@@ -204,16 +204,18 @@ const Home = () => {
             <div className="carousel-track">
               {mobileSlides.map((slide, index) => (
                 <div key={index} className={`slide fade ${current === index ? "active" : ""}`}>
-                  <Image
-                    src={slide.image || "/placeholder.svg"}
-                    alt={`Mobile slide ${index + 1}`}
-                    width={1024}
-                    height={630}
-                    priority={index === 0}
-                    quality={90}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    style={{ objectFit: "cover" }}
-                  />
+                  <ImagePreview fullImageSrc={slide.image} mobileEnabled={isMobile}>
+                    <Image
+                      src={slide.image || "/placeholder.svg"}
+                      alt={`Mobile slide ${index + 1}`}
+                      width={1024}
+                      height={630}
+                      priority={index === 0}
+                      quality={90}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </ImagePreview>
                 </div>
               ))}
             </div>
@@ -307,7 +309,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word1336I2small.gif"
+                  src="images/word1336i2small.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -456,7 +458,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/Word6small2.gif"
+                  src="images/word6small2.gif"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
