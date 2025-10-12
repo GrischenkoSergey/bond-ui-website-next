@@ -92,85 +92,16 @@ const Home = () => {
     },
   ]
 
-  const sectionCarouselSlides = [
-    {
-      image: "images/word2a.webp",
-      thumbnail: "images/word2asmall.gif",
-      title: "Use function keys to display pull down menus, and select commands.",
-      description:
-        "Quickly access your favorite commands with easy to remember function key sequences - F1 F1 Save, F1 F7 Print, etc.",
-    },
-    {
-      image: "images/word1blue.webp",
-      thumbnail: "images/word1bluesmall.gif",
-      title: "Quick Command Bars",
-      description:
-        "Access commands with a single function key, customise your own Quick Command Bars (QCBs). 11 commands per QCB. Easy to add and edit commands. Rename QCBs, change display order, turn on and off individual QCBs, change number of QCBs displayed, from 1 to 12. Save your QCB settings as a standard .xml file.",
-    },
-    {
-      image: "images/word1336i2.webp",
-      thumbnail: "images/word1336i2small.gif",
-      title: "Keyboard Drop Down Menu (KDDM)",
-      description:
-        "Map your favourite commands to any key. Access the KDDM by pressing its menu function key, then press the key of the command you want. Super easy to add or change commands. Save your KDDM settings as a standard .xml file.",
-    },
-    {
-      image: "images/word3a.webp",
-      thumbnail: "images/word3asmall.gif",
-      title: "New dialogue boxes use function keys to select commands.",
-      description:
-        "Large, easy-to-select buttons — ideal for both mouse and touchscreen use. F12 key moves down to next sub-window, Escape key moves up to previous sub-window.",
-    },
-    {
-      image: "images/advancedfind.gif",
-      thumbnail: "images/word6small.gif",
-      title: "Advanced Find",
-      description:
-        "Intuitive dialog boxes are designed to support efficient keyboard use, while enlarged buttons enhance usability for mouse users.",
-    },
-    {
-      image: "images/qcbaddcommand2.gif",
-      thumbnail: "images/qcbaddcommandsmall.gif",
-      title: "Quick Command Bars (QCBs)",
-      description:
-        "Easily add custom commands to your QCBs. Press the function key of the command you wish to change: Select the new command from the standard drop down menu: The command is immediately added to the Quick Command Bar.",
-    },
-    {
-      image: "images/word5.webp",
-      thumbnail: "images/word5small.gif",
-      title: "Font selection made easy!",
-      description:
-        "See more fonts at a glance with a larger font menu. Quickly navigate to font sections by typing the first letter of the font, or section number (e.g., '01', '02'). Move in any direction with the arrow keys to quickly select fonts.",
-    },
-    {
-      image: "images/word6.webp",
-      thumbnail: "images/word6small2.gif",
-      title: "Easy to use dialogue boxes.",
-      description: "Press F1 and F2 Multi-Toggle Buttons to cycle through options.",
-    },
-    {
-      image: "images/word7.webp",
-      thumbnail: "images/word7small.gif",
-      title: "Insert Hyperlink dialogue box.",
-      description: "Big, user-friendly buttons that are perfect for both mouse and touchscreen navigation.",
-    },
-  ]
-
   const autoPlay = true
   const autoPlayInterval = 20000
   const total = carouselSlides.length
-  const totalSectionSlides = sectionCarouselSlides.length
 
   const [current, setCurrent] = useState(0)
-  const [currentSection, setCurrentSection] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [isSectionPaused, setIsSectionPaused] = useState(false)
   const [isPreviewActive, setIsPreviewActive] = useState(false)
   const isMobile = useIsMobile()
   const carouselRef = useRef<HTMLDivElement>(null)
-  const sectionCarouselRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const sectionIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const showSlide = useCallback((index: number) => {
     setCurrent(index)
@@ -186,19 +117,6 @@ const Home = () => {
 
   const goToSlide = useCallback((index: number) => {
     setCurrent(index)
-  }, [])
-
-  // Section carousel callbacks
-  const nextSectionSlide = useCallback(() => {
-    setCurrentSection((prev) => (prev + 1) % totalSectionSlides)
-  }, [totalSectionSlides])
-
-  const prevSectionSlide = useCallback(() => {
-    setCurrentSection((prev) => (prev - 1 + totalSectionSlides) % totalSectionSlides)
-  }, [totalSectionSlides])
-
-  const goToSectionSlide = useCallback((index: number) => {
-    setCurrentSection(index)
   }, [])
 
   // Keyboard navigation
@@ -257,26 +175,6 @@ const Home = () => {
     }
   }, [autoPlay, autoPlayInterval, nextSlide, total, isPaused, isPreviewActive])
 
-  // Auto-play functionality for section carousel
-  useEffect(() => {
-    if (!autoPlay || totalSectionSlides <= 1 || isSectionPaused || isPreviewActive) {
-      if (sectionIntervalRef.current) {
-        clearInterval(sectionIntervalRef.current)
-        sectionIntervalRef.current = null
-      }
-      return
-    }
-
-    sectionIntervalRef.current = setInterval(nextSectionSlide, autoPlayInterval)
-
-    return () => {
-      if (sectionIntervalRef.current) {
-        clearInterval(sectionIntervalRef.current)
-        sectionIntervalRef.current = null
-      }
-    }
-  }, [autoPlay, autoPlayInterval, nextSectionSlide, totalSectionSlides, isSectionPaused, isPreviewActive])
-
   // Pause on hover handlers
   const handleMouseEnter = () => {
     if (autoPlay && !isPreviewActive) {
@@ -287,19 +185,6 @@ const Home = () => {
   const handleMouseLeave = () => {
     if (autoPlay && !isPreviewActive) {
       setIsPaused(false)
-    }
-  }
-
-  // Pause on hover handlers for section carousel
-  const handleSectionMouseEnter = () => {
-    if (autoPlay && !isPreviewActive) {
-      setIsSectionPaused(true)
-    }
-  }
-
-  const handleSectionMouseLeave = () => {
-    if (autoPlay && !isPreviewActive) {
-      setIsSectionPaused(false)
     }
   }
 
@@ -542,95 +427,6 @@ const Home = () => {
         </p>
         <a className="downloadaddin" href="bondui-v270-setup.msi"></a>
         <Link className="buynow" href="/buynow"></Link>
-      </div>
-
-      {/* Section Features Carousel - Mobile Only */}
-      <div id="mobile-view">
-        <div
-          ref={sectionCarouselRef}
-          className="carousel-mobile section-carousel"
-          onMouseEnter={handleSectionMouseEnter}
-          onMouseLeave={handleSectionMouseLeave}
-          role="region"
-          aria-label="Product features carousel"
-          aria-live="polite"
-        >
-          <div className="carousel-functions">
-            <button
-              className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={prevSectionSlide}
-              aria-label="Previous slide"
-            >
-              ❮
-            </button>
-            <button
-              className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={nextSectionSlide}
-              aria-label="Next slide"
-            >
-              ❯
-            </button>
-
-            {/* Mobile progress indicators */}
-            <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
-              {sectionCarouselSlides.map((_, index) => (
-                <button
-                  key={index}
-                  className={`progress-dot ${currentSection === index ? "active" : ""}`}
-                  onClick={() => goToSectionSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={currentSection === index ? "true" : "false"}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Pause indicator */}
-          {isSectionPaused && autoPlay && !isPreviewActive && (
-            <div className="carousel-pause-indicator" aria-live="polite">
-              <span>⏸ Paused</span>
-            </div>
-          )}
-
-          <div className="carousel-container">
-            <div className="carousel-track">
-              {sectionCarouselSlides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`slide fade ${currentSection === index ? "active" : ""}`}
-                  aria-hidden={currentSection !== index}
-                >
-                  <ImagePreview fullImageSrc={slide.image} mobileEnabled={isMobile}>
-                    <Image
-                      src={slide.thumbnail || slide.image}
-                      alt={`${slide.title} - Feature ${index + 1}`}
-                      width={800}
-                      height={500}
-                      priority={index === 0}
-                      quality={85}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </ImagePreview>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="description-item-container section-descriptions">
-            {sectionCarouselSlides.map((slide, index) => (
-              <div key={index} className={`description-item ${currentSection === index ? "active" : ""}`} data-index={index}>
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile slide counter */}
-          <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
-            {currentSection + 1} / {totalSectionSlides}
-          </div>
-        </div>
       </div>
 
       <div className="sectionrow">

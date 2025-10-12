@@ -20,10 +20,7 @@ const ImagePreview = ({
   const [isVisible, setIsVisible] = useState(false)
   const [isPreviewEnabled, setIsPreviewEnabled] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
-  const [hasMoved, setHasMoved] = useState(false)
   const lastTapRef = useRef<number>(0)
-  const startPosRef = useRef<{ x: number; y: number } | null>(null)
-  const isDraggingRef = useRef(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -58,112 +55,36 @@ const ImagePreview = ({
   const showPreview = () => {
     if (isPreviewEnabled) {
       setIsVisible(true)
-      setHasMoved(false)
       document.body.style.overflow = "hidden"
     }
   }
 
   const hidePreview = () => {
     setIsVisible(false)
-    setHasMoved(false)
-    startPosRef.current = null
-    isDraggingRef.current = false
     document.body.style.overflow = ""
   }
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Only close if clicking on backdrop, not on image
-    if (e.target === e.currentTarget && !hasMoved) {
-      hidePreview()
-    }
-  }
-
-  const handleImageMouseDown = (e: React.MouseEvent<HTMLImageElement>) => {
-    if (!isMobile) {
-      startPosRef.current = { x: e.clientX, y: e.clientY }
-      isDraggingRef.current = false
-      setHasMoved(false)
-    }
-  }
-
-  const handleImageMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
-    if (!isMobile && startPosRef.current) {
-      const moveThreshold = 5 // pixels
-      const deltaX = Math.abs(e.clientX - startPosRef.current.x)
-      const deltaY = Math.abs(e.clientY - startPosRef.current.y)
-
-      if (deltaX > moveThreshold || deltaY > moveThreshold) {
-        isDraggingRef.current = true
-        setHasMoved(true)
-      }
-    }
-  }
-
-  const handleImageMouseUp = () => {
-    if (!isMobile) {
-      startPosRef.current = null
-    }
+  const handleBackdropClick = (_: React.MouseEvent<HTMLDivElement>) => {
+    hidePreview()
   }
 
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation()
 
     if (!isMobile) {
-      // Desktop: close on click if image wasn't dragged
-      if (!hasMoved && !isDraggingRef.current) {
-        hidePreview()
-      }
-      isDraggingRef.current = false
+      hidePreview()
       return
     }
 
-    // Mobile: handle double-tap
     const currentTime = new Date().getTime()
     const tapInterval = currentTime - lastTapRef.current
 
     // If tapped within 300ms, consider it a double-tap
     if (tapInterval < 300 && tapInterval > 0) {
-      if (!hasMoved) {
-        hidePreview()
-      }
+      hidePreview()
       lastTapRef.current = 0 // Reset after double-tap
-      setHasMoved(false)
     } else {
       lastTapRef.current = currentTime
-      setHasMoved(false)
-    }
-  }
-
-  const handleImageTouchStart = (e: React.TouchEvent<HTMLImageElement>) => {
-    if (isMobile) {
-      const touch = e.touches[0]
-      startPosRef.current = { x: touch.clientX, y: touch.clientY }
-      isDraggingRef.current = false
-      setHasMoved(false)
-    }
-  }
-
-  const handleImageTouchMove = (e: React.TouchEvent<HTMLImageElement>) => {
-    if (isMobile && startPosRef.current) {
-      const moveThreshold = 10 // pixels - larger threshold for touch
-      const touch = e.touches[0]
-      const deltaX = Math.abs(touch.clientX - startPosRef.current.x)
-      const deltaY = Math.abs(touch.clientY - startPosRef.current.y)
-
-      if (deltaX > moveThreshold || deltaY > moveThreshold) {
-        isDraggingRef.current = true
-        setHasMoved(true)
-      }
-    }
-  }
-
-  const handleImageTouchEnd = () => {
-    if (isMobile) {
-      // Small delay to allow hasMoved state to update
-      setTimeout(() => {
-        startPosRef.current = null
-        isDraggingRef.current = false
-      }, 10)
     }
   }
 
@@ -171,7 +92,7 @@ const ImagePreview = ({
     <>
       <div onClick={showPreview} style={{ cursor: "pointer", width: "100%", height: isMobile ? "100%" : "auto" }}>
         {children}
-      </div>
+      </div >
 
       {isVisible && isPreviewEnabled && (
         <>
@@ -223,24 +144,23 @@ const ImagePreview = ({
                 maxWidth: isMobile ? "none" : "100%",
                 maxHeight: isMobile ? "none" : "100%",
                 display: "block",
-                cursor: hasMoved ? "grabbing" : "grab",
-                userSelect: "none",
-                WebkitUserSelect: "none",
-                WebkitUserDrag: "none",
+                cursor: "grab",
               }}
               alt="Preview"
               onClick={handleImageClick}
-              onMouseDown={handleImageMouseDown}
-              onMouseMove={handleImageMouseMove}
-              onMouseUp={handleImageMouseUp}
-              onTouchStart={handleImageTouchStart}
-              onTouchMove={handleImageTouchMove}
-              onTouchEnd={handleImageTouchEnd}
-              draggable={false}
+              onMouseDown={(e) => {
+                const img = e.currentTarget
+                img.style.cursor = "grabbing"
+              }}
+              onMouseUp={(e) => {
+                const img = e.currentTarget
+                img.style.cursor = "grab"
+              }}
             />
           </div>
         </>
-      )}
+      )
+      }
     </>
   )
 }

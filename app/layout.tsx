@@ -18,9 +18,15 @@ import "./styles/carousel.css"
 import "./styles/devices.css" // Media queries should be loaded last
 
 export const metadata: Metadata = {
-  title: "The Bond Add-in for Microsoft Word",
-  description: "A revolutionary new interface for Microsoft Word",
-  generator: 'v0.app'
+  title: "Bond Add-in for Microsoft Word - Revolutionary Interface",
+  description: "The revolutionary new interface for Microsoft Word. Access commands faster with function keys. Quick Command Bars, custom menus, and intuitive dialogue boxes.",
+  keywords: "Microsoft Word, Word Add-in, productivity, keyboard shortcuts, function keys",
+  authors: [{ name: "Bond Interface Design Ltd" }],
+  // openGraph: {
+  //   title: "Bond Add-in for Microsoft Word",
+  //   description: "Revolutionary keyboard-driven interface for Microsoft Word",
+  //   images: ["/images/banner.webp"],
+  // },
 }
 
 export default function RootLayout({
