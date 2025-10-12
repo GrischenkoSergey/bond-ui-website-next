@@ -114,6 +114,15 @@
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
 
+    /* Light mode menu toggle button when menu is open - reversed gradient */
+    .menu-toggle.open {
+        background: linear-gradient(135deg, #174b6b 0%, #70c1f3 100%);
+    }
+
+    .menu-toggle.open:hover {
+        background: linear-gradient(135deg, #174b6b 0%, #70c1f3 100%);
+    }
+
     /* Dark mode menu toggle button */
     .dark .menu-toggle {
         background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);

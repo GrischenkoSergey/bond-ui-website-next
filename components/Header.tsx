@@ -109,7 +109,7 @@ const Header = () => {
 
           <div id="heading">
             <nav>
-              <button className="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation" onClick={toggleMenu}>
+              <button className={`menu-toggle ${isMenuOpen ? "open" : ""}`} id="menu-toggle" aria-label="Toggle Navigation" onClick={toggleMenu}>
                 &#9776;
               </button>
 

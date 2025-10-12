@@ -11,42 +11,49 @@ import { useIsMobile } from '@/hooks/use-mobile'
 const Home = () => {
   const carouselSlides = [
     {
-      image: "/images/carousel/word1024x630start.webp",
-      thumbnail: "/images/carousel/word1024x630startsmall.webp",
+      image: "images/carousel/word1024x630start.webp",
+      // thumbnail: "images/carousel/word1024x630startsmall.webp",
+      thumbnail: "images/carousel/word1024x630start.webp",
       description:
         "Use function keys to select drop down menus, menu commands, and dialogue box commands. Custom Quick Command Bars (QCB)- access commands with a single function key, customise your own Quick Command Bars. Custom Keyboard Drop Down Menu (KDDM)- add commands to 48 keyboard keys on one menu, 12 KDDMs available, mapped to function keys.",
     },
     {
-      image: "/images/carousel/word1024x630q.webp",
-      thumbnail: "/images/carousel/Word1024x630qsmall.webp",
+      image: "images/carousel/word1024x630q.webp",
+      // thumbnail: "images/carousel/Word1024x630qsmall.webp",
+      thumbnail: "images/carousel/Word1024x630q.webp",
       description: "Use function keys to access drop down menus and menu commands.",
     },
     {
       image: "images/carousel/word1024x630c2.webp",
-      thumbnail: "images/carousel/word1024x630c2small.webp",
+      // thumbnail: "images/carousel/word1024x630c2small.webp",
+      thumbnail: "images/carousel/word1024x630c2.webp",
       description:
         'Keyboard Drop Down Menu (KDDM) - fully customisable keyboard menu. 12 KDDMs to customise, each with 48 commands. Map any command to any key. Even map previously opened documents to any key. Rename KDDM menu titles - e.g. change "F1 File" to "F1 Main".',
     },
     {
       image: "images/carousel/word1024x630d2.webp",
-      thumbnail: "images/carousel/word1024x630d2small.webp",
+      // thumbnail: "images/carousel/word1024x630d2small.webp",
+      thumbnail: "images/carousel/word1024x630d2.webp",
       description:
         "Quick Command Bars (QCB) - fully customisable command bars. Create custom command bars with 11 commands per bar, each command instantly accessible with just one function key press. Easily change titles of QCBs. Display up to 12 QCBs at one time - 132 commands, all accessible with the mouse too!",
     },
     {
       image: "images/carousel/word1024x630n.webp",
-      thumbnail: "images/carousel/word1024x630nsmall.webp",
+      // thumbnail: "images/carousel/word1024x630nsmall.webp",
+      thumbnail: "images/carousel/word1024x630n.webp",
       description: "Add flyout menus to Quick Command Bars for quicker access.",
     },
     {
       image: "images/carousel/word1024x630o.webp",
-      thumbnail: "images/carousel/word1024x630osmall.webp",
+      // thumbnail: "images/carousel/word1024x630osmall.webp",
+      thumbnail: "images/carousel/word1024x630o.webp",
       description:
         "Show or hide individual Quick Command Bars, easily add new commands, rename QCBs, change display order.",
     },
     {
       image: "images/carousel/word1024x630p.webp",
-      thumbnail: "images/carousel/word1024x630psmall.webp",
+      // thumbnail: "images/carousel/word1024x630psmall.webp",
+      thumbnail: "images/carousel/word1024x630p.webp",
       description: "Custom colour themes supplied. User editable .xml file included, make your own themes!",
     },
   ]
@@ -103,62 +110,73 @@ const Home = () => {
   const sectionCarouselSlides = [
     {
       image: "images/word2a.webp",
-      thumbnail: "images/word2asmall.gif",
+      // thumbnail: "images/word2asmall.gif",
+      thumbnail: "images/word2a.webp",
       title: "Use function keys to display pull down menus, and select commands.",
       description:
         "Quickly access your favorite commands with easy to remember function key sequences - F1 F1 Save, F1 F7 Print, etc.",
     },
     {
       image: "images/word1blue.webp",
-      thumbnail: "images/word1bluesmall.gif",
+      // thumbnail: "images/word1bluesmall.gif",
+      thumbnail: "images/word1blue.webp",
       title: "Quick Command Bars (QCBs)",
       description:
         "Single function key access to commands. Customise your own QCBs with 11 commands each. Easy to add, edit, and rename. Display 1-12 QCBs. Save settings as .xml file.",
     },
     {
       image: "images/word1336i2.webp",
-      thumbnail: "images/word1336i2small.gif",
+      // thumbnail: "images/word1336i2small.gif",
+      thumbnail: "images/word1336i2.webp",
       title: "Keyboard Drop Down Menu (KDDM)",
       description:
         "Map favourite commands to any key. Press the KDDM menu key, then press your command key. Simple to add and edit. Save settings as .xml file.",
     },
     {
       image: "images/word3a.webp",
-      thumbnail: "images/word3asmall.gif",
+      // thumbnail: "images/word3asmall.gif",
+      thumbnail: "images/word3a.webp",
       title: "New dialogue boxes use function keys to select commands.",
       description:
         "Large, easy-to-select buttons — ideal for both mouse and touchscreen use. F12 moves to the next sub-window, Escape moves to the previous sub-window.",
     },
     {
-      image: "images/advancedfind.gif",
-      thumbnail: "images/word6small.gif",
+      // image: "images/advancedfind.gif",
+      image: "images/word3a.webp",
+      // thumbnail: "images/word6small.gif",
+      thumbnail: "images/word3a.webp",
       title: "Advanced Find",
       description:
         "Intuitive dialog boxes are designed to support efficient keyboard use, while enlarged buttons enhance usability for mouse users.",
     },
     {
-      image: "images/qcbaddcommand2.gif",
-      thumbnail: "images/qcbaddcommandsmall.gif",
+      // image: "images/qcbaddcommand2.gif",
+      image: "images/word3a.webp",
+      // thumbnail: "images/qcbaddcommandsmall.gif",
+      thumbnail: "images/word3a.webp",
       title: "Quick Command Bars (QCBs)",
       description:
         "Easily add custom commands to your QCBs. Press the function key of the command you wish to change. Select the new command from the standard drop-down menu. The command is immediately added to the QCB.",
     },
     {
       image: "images/word5.webp",
-      thumbnail: "images/word5small.gif",
+      // thumbnail: "images/word5small.gif",
+      thumbnail: "images/word5.webp",
       title: "Font selection made easy!",
       description:
         "See more fonts at a glance with a larger font menu. Quickly navigate to font sections by typing the first letter of the font, or section number (e.g., '01', '02'). Move in any direction with the arrow keys to quickly select fonts.",
     },
     {
       image: "images/word6.webp",
-      thumbnail: "images/word6small2.gif",
+      // thumbnail: "images/word6small2.gif",
+      thumbnail: "images/word6.webp",
       title: "Easy to use dialogue boxes.",
       description: "Press F1 and F2 Multi-Toggle Buttons to cycle through options.",
     },
     {
       image: "images/word7.webp",
-      thumbnail: "images/word7small.gif",
+      // thumbnail: "images/word7small.gif",
+      thumbnail: "images/word7.webp",
       title: "Insert Hyperlink dialogue box.",
       description: "Big, user-friendly buttons that are perfect for both mouse and touchscreen navigation.",
     },
@@ -423,7 +441,7 @@ const Home = () => {
             {carouselSlides.map((slide, index) => (
               <Image
                 key={index}
-                src={slide.thumbnail || "/placeholder.svg"}
+                src={`/${slide.thumbnail}` || "/placeholder.svg"}
                 alt={`Thumbnail ${index + 1}`}
                 width={150}
                 height={92}
@@ -452,7 +470,7 @@ const Home = () => {
                 aria-hidden={current !== index}
               >
                 <Image
-                  src={slide.image || "/placeholder.svg"}
+                  src={`/${slide.image}` || "/placeholder.svg"}
                   alt={`Slide ${index + 1}: ${slide.description.substring(0, 50)}...`}
                   width={1024}
                   height={630}
@@ -552,11 +570,11 @@ const Home = () => {
                         src={`/${slide.image}`}
                         alt={`Mobile slide ${index + 1}`}
                         fill
-                        sizes="(max-width: 1151px) 100vw, 0px"
+                        sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, (max-width: 768px) 720px, (max-width: 1024px) 980px, (max-width: 1151px) 1100px, 0px"
                         priority={index === 0}
-                        quality={90}
+                        quality={85}
                         loading={index === 0 ? "eager" : "lazy"}
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', objectPosition: 'top left' }}
                       />
                     </div>
                   </CarouselImagePreview>
@@ -662,11 +680,11 @@ const Home = () => {
                         src={`/${slide.thumbnail || slide.image}`}
                         alt={`${slide.title} - Feature ${index + 1}`}
                         fill
-                        sizes="(max-width: 1151px) 100vw, 0px"
+                        sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, (max-width: 768px) 720px, (max-width: 1024px) 980px, (max-width: 1151px) 1100px, 0px"
                         priority={index === 0}
-                        quality={100}
+                        quality={85}
                         loading={index === 0 ? "eager" : "lazy"}
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', objectPosition: 'top left' }}
                       />
                     </div>
                   </CarouselImagePreview>
@@ -688,11 +706,11 @@ const Home = () => {
 
       <div className="sectionrow">
         <div className="section">
-          <ImagePreview fullImageSrc="images/word2a.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word2a.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word2asmall.gif"
+                  src="/images/word2asmall.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and QCB"
                   width={800}
@@ -702,7 +720,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -717,11 +735,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/word1blue.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word1blue.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word1bluesmall.gif"
+                  src="/images/word1bluesmall.gif"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -731,7 +749,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -749,11 +767,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/word1336i2.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word1336i2.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word1336i2small.gif"
+                  src="/images/word1336i2small.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -763,7 +781,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -780,11 +798,11 @@ const Home = () => {
 
       <div className="sectionrow">
         <div className="section">
-          <ImagePreview fullImageSrc="images/word3a.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word3a.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word3asmall.gif"
+                  src="/images/word3asmall.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and QCB"
                   width={800}
@@ -794,7 +812,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -807,11 +825,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/advancedfind.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/advancedfind.gif" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word6small.gif"
+                  src="/images/word6small.gif"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -821,7 +839,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -836,11 +854,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/qcbaddcommand2.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/qcbaddcommand2.gif" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/qcbaddcommandsmall.gif"
+                  src="/images/qcbaddcommandsmall.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -850,7 +868,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -867,11 +885,11 @@ const Home = () => {
 
       <div className="sectionrow">
         <div className="section">
-          <ImagePreview fullImageSrc="images/word5.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word5.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word5small.gif"
+                  src="/images/word5small.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -881,7 +899,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -898,11 +916,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/word6.webp" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word6.webp" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word6small2.gif"
+                  src="/images/word6small2.gif"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -912,7 +930,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
@@ -924,11 +942,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="images/word7.webp" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/word7.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="images/word7small.gif"
+                  src="/images/word7small.gif"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -938,7 +956,7 @@ const Home = () => {
                 />
               </div>
               <div className="Magnifying">
-                <Image src="images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
+                <Image src="/images/3d-magnifier.svg" height={50} width={50} alt="Zoom Icon" loading="lazy" />
               </div>
             </div>
           </ImagePreview>
