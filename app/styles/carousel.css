@@ -27,9 +27,9 @@
 .carousel-counter-mobile.hidden,
 .carousel-thumbnails.hidden,
 .carousel-pause-indicator.hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 /* ============================================
@@ -827,20 +827,16 @@
    SECTION CAROUSEL STYLES (MOBILE ONLY)
    ============================================ */
 
-.section-carousel {
+/* Section carousel specific overrides - more specific selector */
+.carousel-mobile.section-carousel {
     margin-top: 40px;
     margin-bottom: 40px;
     min-height: 80vh;
-    /* Increased to ensure description area is visible */
-    height: auto !important;
-    /* Override carousel-mobile fixed height */
-    overflow: hidden !important;
-    /* Clip content to border-radius */
+    height: auto;
+    overflow: hidden;
     border-radius: 10px;
-    /* Ensure rounded corners match carousel-mobile */
     display: flex;
     flex-direction: column;
-    /* Stack image and description vertically */
 }
 
 .section-carousel .carousel-container {
@@ -873,188 +869,467 @@
     justify-content: center;
 }
 
-.section-carousel .slide {
-    position: absolute !important;
-    /* Must be absolute like other slides */
+/* More specific selectors to avoid !important */
+.carousel-mobile.section-carousel .carousel-track .slide {
+    position: absolute;
     width: 100%;
     height: 100%;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    /* Hidden by default */
     visibility: hidden;
     transition: opacity 1s ease, visibility 0s linear 1s;
     pointer-events: none;
 }
 
-.section-carousel .slide.active {
-    opacity: 1 !important;
-    /* Show active slide */
+.carousel-mobile.section-carousel .carousel-track .slide.active {
+    opacity: 1;
     z-index: 2;
-    visibility: visible !important;
+    visibility: visible;
     transition: opacity 1s ease, visibility 0s linear 0s;
     pointer-events: auto;
 }
 
-/* Make sure ImagePreview wrapper doesn't interfere */
-.section-carousel .slide>* {
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    /* Changed from flex to block to avoid layout issues */
-    pointer-events: auto !important;
-    /* Ensure clicks pass through to ImagePreview */
+/* ImagePreview wrapper styling - more specific */
+.carousel-mobile.section-carousel .carousel-track .slide>*:first-child {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto;
 }
 
-/* Target all nested elements to ensure proper sizing - but NOT inside preview modal */
-.section-carousel .slide>*>*:not(#section-carousel-preview *) {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    pointer-events: auto !important;
-    display: block !important;
+/* Nested div inside ImagePreview - but NOT inside preview modal */
+.carousel-mobile.section-carousel .carousel-track .slide>*>*:not(#section-carousel-preview *) {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: auto;
+    display: block;
 }
 
-/* Only constrain images that are in the carousel slide, not in preview */
-.section-carousel .slide img:not(#section-carousel-preview img) {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    /* Fill container completely */
+/* Images in carousel slide - but not in preview modal */
+.carousel-mobile.section-carousel .carousel-track .slide img:not(#section-carousel-preview img) {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-/* Reset constraints for preview modal content */
+/* Preview modal content - separate specific selector */
 #section-carousel-preview img {
-    width: auto !important;
-    height: auto !important;
+    width: auto;
+    height: auto;
     min-width: 100%;
     min-height: 100%;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: contain !important;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
 }
 
-.section-descriptions {
+/* Section carousel progress dots positioning - above description */
+.carousel-mobile.section-carousel .carousel-progress-mobile {
+    bottom: 220px;
+    z-index: 160;
+}
+
+/* More specific selector for section descriptions */
+.carousel-mobile.section-carousel .description-item-container.section-descriptions {
     padding: 20px;
     min-height: 200px;
     text-align: center;
     position: relative;
-    margin-top: 0 !important;
-    /* Override any margin-top from description-item-container */
-    background-color: rgba(255, 255, 255, 0.95);
-    /* White background for text readability */
+    margin-top: 0;
+    background-color: oklch(0.94 0.005 250);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     flex-shrink: 0;
-    /* Prevent shrinking - always maintain minimum height */
 }
 
-.section-descriptions .description-item {
-    position: absolute !important;
+.dark .carousel-mobile.section-carousel .description-item-container.section-descriptions {
+    background-color: rgb(40, 1, 62);
+}
+
+.carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
+    position: absolute;
     top: 20px;
     left: 20px;
     right: 20px;
-    width: calc(100% - 40px) !important;
-    height: auto !important;
-    /* Override height: 100% */
+    width: calc(100% - 40px);
+    height: auto;
     opacity: 0;
     transition: opacity 1s ease;
     pointer-events: none;
-    display: block !important;
-    /* Ensure it's displayed */
+    display: block;
 }
 
-.section-descriptions .description-item.active {
-    opacity: 1 !important;
+.carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item.active {
+    opacity: 1;
     pointer-events: auto;
     z-index: 1;
-    display: block !important;
+    display: block;
 }
 
-.section-descriptions .description-item h3 {
+.carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 10px;
-    color: #28013e;
-    /* Dark purple text for readability */
+    margin-bottom: 15px;
+    color: rgb(60, 60, 0);
     display: block;
 }
 
-.section-descriptions .description-item p {
-    font-size: 1rem;
+.dark .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
+    color: rgb(255, 255, 102);
+}
+
+.carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+    font-size: 1.1rem;
     line-height: 1.5;
-    color: #333333;
-    /* Dark gray text for readability */
+    margin-bottom: 10px;
+    color: oklch(0.145 0 0);
     display: block;
+}
+
+.dark .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+    color: oklch(0.985 0 0);
 }
 
 /* Mobile adjustments for section carousel */
 @media only screen and (max-width: 1151px) {
-    .section-carousel {
+    .carousel-mobile.section-carousel {
         margin-top: 30px;
         margin-bottom: 30px;
     }
 
-    .section-descriptions {
+    .carousel-mobile.section-carousel .carousel-progress-mobile {
+        bottom: 200px;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 180px;
     }
 
-    .section-descriptions .description-item {
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
         top: 15px;
         left: 15px;
         right: 15px;
         width: calc(100% - 30px);
     }
 
-    .section-descriptions .description-item h3 {
-        font-size: 1.1rem;
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
+        font-size: 1.3rem;
     }
 
-    .section-descriptions .description-item p {
-        font-size: 0.9rem;
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+        font-size: 1.1rem;
     }
 }
 
 @media (orientation: landscape) and (max-width: 1151px) {
-    .section-carousel {
+    .carousel-mobile.section-carousel {
         min-height: 85vh;
     }
 
-    .section-carousel .carousel-container {
+    .carousel-mobile.section-carousel .carousel-container {
         min-height: 35vh;
-        /* Smaller image area in landscape */
     }
 
-    .section-carousel .slide img {
+    .carousel-mobile.section-carousel .carousel-track .slide img {
         max-height: 40vh;
     }
 
-    .section-descriptions {
+    .carousel-mobile.section-carousel .carousel-progress-mobile {
+        bottom: 160px;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 140px;
         padding: 15px;
     }
 
-    .section-descriptions .description-item {
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
         top: 15px;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+        font-size: 1rem;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .section-descriptions {
+    .carousel-mobile.section-carousel .carousel-progress-mobile {
+        bottom: 240px;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 220px;
         padding: 15px;
     }
 
-    .section-descriptions .description-item h3 {
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+        font-size: 1rem;
+    }
+}
+
+/* Extra small screens for section carousel */
+@media only screen and (max-width: 320px) {
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
         font-size: 1rem;
     }
 
-    .section-descriptions .description-item p {
-        font-size: 0.85rem;
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item p {
+        font-size: 0.9rem;
+        line-height: 1.3;
+    }
+}
+
+/* ============================================
+   MAIN MOBILE CAROUSEL STYLES (MATCHING SECTION CAROUSEL)
+   ============================================ */
+
+/* Main mobile carousel progress dots positioning - above description */
+.carousel-mobile.main-mobile-carousel .carousel-progress-mobile {
+    bottom: 220px;
+    z-index: 160;
+}
+
+.carousel-mobile.main-mobile-carousel {
+    min-height: 80vh;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-container {
+    flex: 1;
+    min-height: 50vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 0s linear 1s;
+    pointer-events: none;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track .slide.active {
+    opacity: 1;
+    z-index: 2;
+    visibility: visible;
+    transition: opacity 1s ease, visibility 0s linear 0s;
+    pointer-events: auto;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track .slide>*:first-child {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track .slide>*>*:not(#section-carousel-preview *) {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: auto;
+    display: block;
+}
+
+.carousel-mobile.main-mobile-carousel .carousel-track .slide img:not(#section-carousel-preview img) {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
+    padding: 20px;
+    min-height: 200px;
+    text-align: center;
+    position: relative;
+    margin-top: 0;
+    background-color: oklch(0.94 0.005 250);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    flex-shrink: 0;
+}
+
+.dark .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
+    background-color: rgb(40, 1, 62);
+}
+
+.carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+    height: auto;
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    display: block;
+}
+
+.carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+    display: block;
+}
+
+.carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: rgb(60, 60, 0);
+    display: block;
+}
+
+.dark .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+    color: rgb(255, 255, 102);
+}
+
+.carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: oklch(0.145 0 0);
+    display: block;
+}
+
+.dark .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+    color: oklch(0.985 0 0);
+}
+
+/* Mobile adjustments for main mobile carousel */
+@media only screen and (max-width: 1151px) {
+    .carousel-mobile.main-mobile-carousel .carousel-progress-mobile {
+        bottom: 200px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
+        min-height: 180px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        width: calc(100% - 30px);
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+        font-size: 1.3rem;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1151px) {
+    .carousel-mobile.main-mobile-carousel {
+        min-height: 85vh;
+    }
+
+    .carousel-mobile.main-mobile-carousel .carousel-container {
+        min-height: 35vh;
+    }
+
+    .carousel-mobile.main-mobile-carousel .carousel-track .slide img {
+        max-height: 40vh;
+    }
+
+    .carousel-mobile.main-mobile-carousel .carousel-progress-mobile {
+        bottom: 160px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
+        min-height: 140px;
+        padding: 15px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
+        top: 15px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel-mobile.main-mobile-carousel .carousel-progress-mobile {
+        bottom: 240px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
+        min-height: 220px;
+        padding: 15px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+        font-size: 1rem;
+    }
+}
+
+/* Extra small screens for main mobile carousel */
+@media only screen and (max-width: 320px) {
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
+        font-size: 1rem;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item p {
+        font-size: 0.9rem;
+        line-height: 1.3;
     }
 }

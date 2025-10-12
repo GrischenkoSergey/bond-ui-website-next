@@ -806,12 +806,13 @@
 
 @media screen and (orientation: landscape) and (max-width: 1151px) {
 
-    .scrollmenu.show a,
-    .scrollmenu.show .theme-toggle-btn {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        text-align: left !important;
+    /* More specific selector to avoid !important */
+    nav .scrollmenu.show a,
+    nav .scrollmenu.show .theme-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
     }
 }
 
@@ -906,10 +907,10 @@
         overflow-y: auto;
     }
 
-    div.scrollmenu.show a,
-    div.scrollmenu.show .theme-toggle-btn {
+    nav div.scrollmenu.show a,
+    nav div.scrollmenu.show .theme-toggle-btn {
         padding: 10px 15px;
-        font-size: 0.95rem !important;
+        font-size: 0.95rem;
         line-height: 1.4;
         display: flex;
         align-items: center;
@@ -924,10 +925,10 @@
         border-radius: 8px;
     }
 
-    div.scrollmenu.show a,
-    div.scrollmenu.show .theme-toggle-btn {
+    nav div.scrollmenu.show a,
+    nav div.scrollmenu.show .theme-toggle-btn {
         padding: 6px 12px;
-        font-size: 0.9rem !important;
+        font-size: 0.9rem;
         line-height: 1.3;
         display: flex;
         align-items: center;
@@ -952,12 +953,12 @@
         max-height: calc(100vh - 100px);
     }
 
-    div.scrollmenu.show a,
-    div.scrollmenu.show .theme-toggle-btn {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        font-size: 1.1rem !important;
+    nav div.scrollmenu.show a,
+    nav div.scrollmenu.show .theme-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 1.1rem;
     }
 }
 
@@ -966,13 +967,13 @@
    ============================================ */
 
 @media screen and (orientation: portrait) {
-    .section {
-        width: 100% !important;
+    .sectionrow .section {
+        width: 100%;
     }
 }
 
 @media screen and (orientation: landscape) {
-    .section {
-        width: 100% !important;
+    .sectionrow .section {
+        width: 100%;
     }
 }

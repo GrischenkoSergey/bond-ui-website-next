@@ -4,10 +4,11 @@
 
 /* Updated to use modern Tailwind design tokens instead of hardcoded colors */
 
-/* Theme Toggle Button */
-.theme-toggle-btn {
-    background: none !important;
-    border: none !important;
+/* Theme Toggle Button - more specific selector */
+nav .theme-toggle-btn,
+.scrollmenu .theme-toggle-btn {
+    background: none;
+    border: none;
     cursor: pointer;
     transition: color 1.0s ease;
 }

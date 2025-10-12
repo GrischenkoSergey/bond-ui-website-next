@@ -55,40 +55,47 @@ const Home = () => {
     {
       image: "images/carousel/word1024x630a.webp",
       thumbnail: "",
+      title: "Pull down menus and commands",
       description:
         "Use function keys to open pull down menus and run commands. Use function keys to adjust values in dialogue boxes",
     },
     {
       image: "images/carousel/word1024x630b.webp",
       thumbnail: "",
+      title: "Drop down menus and menu commands",
       description: "Use function keys to access drop down menus and menu commands.",
     },
     {
       image: "images/carousel/word1024x630g.webp",
       thumbnail: "",
+      title: "Keyboard Drop Down Menu (KDDM)",
       description:
-        'Keyboard Drop Down Menu (KDDM) - fully customisable keyboard menu. 12 KDDMs to customise, each with 48 commands. Map any command to any key. Rename KDDM menu titles - e.g. change "F1 File" to "F1 Main".',
+        'Fully customisable keyboard menu. 12 KDDMs to customise, each with 48 commands. Map any command to any key. Rename KDDM menu titles - e.g. change "F1 File" to "F1 Main".',
     },
     {
       image: "images/carousel/word1024x630d2.webp",
       thumbnail: "",
+      title: "Quick Command Bars (QCB)",
       description:
-        "Quick Command Bars (QCB) - fully customisable command bars. Create custom command bars with 11 commands per bar. Easily change titles of QCBs. Display up to 12 QCBs at one time - 132 commands, all accessible with the mouse too!",
+        "Fully customisable command bars. Create custom command bars with 11 commands per bar. Easily change titles of QCBs. Display up to 12 QCBs at one time - 132 commands, all accessible with the mouse too!",
     },
     {
       image: "images/carousel/word1024x630n.webp",
       thumbnail: "",
+      title: "Flyout menus",
       description: "Add flyout menus to Quick Command Bars for quicker access.",
     },
     {
       image: "images/carousel/word1024x630o.webp",
       thumbnail: "",
+      title: "Quick Command Bars management",
       description:
         "Show or hide individual Quick Command Bars, easily add new commands, rename QCBs, change display order.",
     },
     {
       image: "images/carousel/word1024x630p.webp",
       thumbnail: "",
+      title: "Colour themes management",
       description: "Custom colour themes supplied. User editable .xml file included, make your own themes!",
     },
   ]
@@ -457,7 +464,7 @@ const Home = () => {
           <h1>Microsoft Word</h1>
         </div>
         <div
-          className="carousel-mobile"
+          className="carousel-mobile main-mobile-carousel"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           role="region"
@@ -494,6 +501,13 @@ const Home = () => {
             </div>
           </div>
 
+          {/* Pause indicator */}
+          {isPaused && autoPlay && !isPreviewActive && (
+            <div className="carousel-pause-indicator" aria-live="polite">
+              <span>⏸ Paused</span>
+            </div>
+          )}
+
           <div className="carousel-container">
             <div className="carousel-track">
               {mobileSlides.map((slide, index) => (
@@ -502,32 +516,43 @@ const Home = () => {
                   className={`slide fade ${current === index ? "active" : ""}`}
                   aria-hidden={current !== index}
                 >
-                  <ImagePreview fullImageSrc={slide.image} mobileEnabled={isMobile}>
-                    <Image
-                      src={slide.image || "/placeholder.svg"}
-                      alt={`Mobile slide ${index + 1}`}
-                      width={1024}
-                      height={630}
-                      priority={index === 0}
-                      quality={90}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      style={{ width: "auto", height: "auto", objectFit: "cover" }}
-                    />
-                  </ImagePreview>
+                  <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                      <Image
+                        src={`/${slide.image}`}
+                        alt={`Mobile slide ${index + 1}`}
+                        fill
+                        sizes="(max-width: 1151px) 100vw, 0px"
+                        priority={index === 0}
+                        quality={90}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  </CarouselImagePreview>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="description-item-container">
+          <div className="description-item-container mobile-descriptions">
             {mobileSlides.map((slide, index) => (
               <div key={index} className={`description-item ${current === index ? "active" : ""}`} data-index={index}>
-                <p>
-                  {index + 1} {slide.description}
-                </p>
+                <h3>{slide.title}</h3>
+                <p>{slide.description}</p>
               </div>
             ))}
           </div>
+
+          {/* <div className="description-item-container section-descriptions">
+            {sectionCarouselSlides.map((slide, index) => (
+              <div key={index} className={`description-item ${currentSection === index ? "active" : ""}`} data-index={index}>
+                <h3>{slide.title}</h3>
+                <p>{slide.description}</p>
+              </div>
+            ))}
+          </div> */}
+
 
           {/* Mobile slide counter */}
           <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
@@ -602,21 +627,6 @@ const Home = () => {
                   className={`slide fade ${currentSection === index ? "active" : ""}`}
                   aria-hidden={currentSection !== index}
                 >
-                  {/* <ImagePreview fullImageSrc={`/${slide.image}`} mobileEnabled={isMobile}>
-                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                      <Image
-                        src={`/${slide.thumbnail || slide.image}`}
-                        alt={`${slide.title} - Feature ${index + 1}`}
-                        fill
-                        sizes="(max-width: 1151px) 100vw, 0px"
-                        priority={index === 0}
-                        quality={100}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                  </ImagePreview> */}
-
                   <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                       <Image
