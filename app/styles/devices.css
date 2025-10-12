@@ -114,6 +114,18 @@
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     }
 
+    /* Dark mode menu toggle button */
+    .dark .menu-toggle {
+        background: linear-gradient(135deg, #28013e 0%, #4a0e4e 100%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .dark .menu-toggle:hover {
+        background: linear-gradient(135deg, #4a0e4e 0%, #28013e 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
     .scrollmenu a {
         padding: 15px;
         font-size: 18px;
