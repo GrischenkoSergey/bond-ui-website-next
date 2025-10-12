@@ -169,6 +169,22 @@ const Home = () => {
   const total = carouselSlides.length
   const totalSectionSlides = sectionCarouselSlides.length
 
+  // Mobile carousel UI controls (only for mobile mode)
+  const mobileCarouselControls = {
+    showNavigationButtons: true,    // Show prev/next arrow buttons
+    showProgressDots: true,          // Show progress indicator dots
+    showPauseIndicator: false,        // Show "Paused" indicator when hovering
+    showSlideCounter: true,         // Show "1 / 7" slide counter (disabled by default)
+  }
+
+  // Section carousel UI controls (only for mobile mode)
+  const sectionCarouselControls = {
+    showNavigationButtons: true,    // Show prev/next arrow buttons
+    showProgressDots: true,          // Show progress indicator dots
+    showPauseIndicator: false,        // Show "Paused" indicator when hovering
+    showSlideCounter: true,         // Show "1 / 9" slide counter (disabled by default)
+  }
+
   const [current, setCurrent] = useState(0)
   const [currentSection, setCurrentSection] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -472,37 +488,51 @@ const Home = () => {
           aria-live="polite"
         >
           <div className="carousel-functions">
-            <button
-              className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={prevSlide}
-              aria-label="Previous slide"
-            >
-              ❮
-            </button>
-            <button
-              className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={nextSlide}
-              aria-label="Next slide"
-            >
-              ❯
-            </button>
-
-            {/* Mobile progress indicators */}
-            <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
-              {mobileSlides.map((_, index) => (
+            {/* Navigation buttons - conditionally rendered */}
+            {mobileCarouselControls.showNavigationButtons && (
+              <>
                 <button
-                  key={index}
-                  className={`progress-dot ${current === index ? "active" : ""}`}
-                  onClick={() => goToSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={current === index ? "true" : "false"}
-                />
-              ))}
-            </div>
+                  className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
+                  onClick={prevSlide}
+                  aria-label="Previous slide"
+                >
+                  ❮
+                </button>
+                <button
+                  className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
+                  onClick={nextSlide}
+                  aria-label="Next slide"
+                >
+                  ❯
+                </button>
+              </>
+            )}
+
+            {/* Mobile progress indicators - conditionally rendered */}
+            {mobileCarouselControls.showProgressDots && (
+              <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
+                {mobileSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`progress-dot ${current === index ? "active" : ""}`}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                    aria-current={current === index ? "true" : "false"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Pause indicator */}
-          {isPaused && autoPlay && !isPreviewActive && (
+          {/* Slide counter - conditionally rendered */}
+          {mobileCarouselControls.showSlideCounter && (
+            <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
+              {current + 1} / {mobileSlides.length}
+            </div>
+          )}
+
+          {/* Pause indicator - conditionally rendered */}
+          {mobileCarouselControls.showPauseIndicator && isPaused && autoPlay && !isPreviewActive && (
             <div className="carousel-pause-indicator" aria-live="polite">
               <span>⏸ Paused</span>
             </div>
@@ -543,11 +573,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-
-          {/* Mobile slide counter */}
-          <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
-            {current + 1} / {total}
-          </div>
         </div>
       </div>
 
@@ -573,37 +598,51 @@ const Home = () => {
           aria-live="polite"
         >
           <div className="carousel-functions">
-            <button
-              className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={prevSectionSlide}
-              aria-label="Previous slide"
-            >
-              ❮
-            </button>
-            <button
-              className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
-              onClick={nextSectionSlide}
-              aria-label="Next slide"
-            >
-              ❯
-            </button>
-
-            {/* Mobile progress indicators */}
-            <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
-              {sectionCarouselSlides.map((_, index) => (
+            {/* Navigation buttons - conditionally rendered */}
+            {sectionCarouselControls.showNavigationButtons && (
+              <>
                 <button
-                  key={index}
-                  className={`progress-dot ${currentSection === index ? "active" : ""}`}
-                  onClick={() => goToSectionSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={currentSection === index ? "true" : "false"}
-                />
-              ))}
-            </div>
+                  className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
+                  onClick={prevSectionSlide}
+                  aria-label="Previous slide"
+                >
+                  ❮
+                </button>
+                <button
+                  className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
+                  onClick={nextSectionSlide}
+                  aria-label="Next slide"
+                >
+                  ❯
+                </button>
+              </>
+            )}
+
+            {/* Mobile progress indicators - conditionally rendered */}
+            {sectionCarouselControls.showProgressDots && (
+              <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
+                {sectionCarouselSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`progress-dot ${currentSection === index ? "active" : ""}`}
+                    onClick={() => goToSectionSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                    aria-current={currentSection === index ? "true" : "false"}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Pause indicator */}
-          {isSectionPaused && autoPlay && !isPreviewActive && (
+          {/* Slide counter - conditionally rendered */}
+          {sectionCarouselControls.showSlideCounter && (
+            <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
+              {currentSection + 1} / {sectionCarouselSlides.length}
+            </div>
+          )}
+
+          {/* Pause indicator - conditionally rendered */}
+          {sectionCarouselControls.showPauseIndicator && isSectionPaused && autoPlay && !isPreviewActive && (
             <div className="carousel-pause-indicator" aria-live="polite">
               <span>⏸ Paused</span>
             </div>
@@ -643,11 +682,6 @@ const Home = () => {
                 <p>{slide.description}</p>
               </div>
             ))}
-          </div>
-
-          {/* Mobile slide counter */}
-          <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
-            {currentSection + 1} / {totalSectionSlides}
           </div>
         </div>
       </div>
