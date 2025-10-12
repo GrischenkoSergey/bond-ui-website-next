@@ -846,35 +846,82 @@
 .section-carousel .carousel-container {
     flex: 1;
     /* Take remaining space, pushing descriptions to bottom */
-    min-height: 40vh;
+    min-height: 50vh;
     /* Minimum height for images */
+    height: 100%;
+    /* Explicitly set height */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 10px;
+    padding: 0;
+    /* Remove padding to fill completely */
+    overflow: hidden;
+    /* Clip any overflow */
+    position: relative;
+    /* Make it a positioning context for absolute children */
 }
 
 .section-carousel .carousel-track {
     width: 100%;
     height: 100%;
+    position: absolute;
+    /* Position absolutely to fill container */
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .section-carousel .slide {
-    display: flex;
+    position: absolute !important;
+    /* Must be absolute like other slides */
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    /* Hidden by default */
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 0s linear 1s;
+    pointer-events: none;
+}
+
+.section-carousel .slide.active {
+    opacity: 1 !important;
+    /* Show active slide */
+    z-index: 2;
+    visibility: visible !important;
+    transition: opacity 1s ease, visibility 0s linear 0s;
+    pointer-events: auto;
+}
+
+/* Make sure ImagePreview wrapper doesn't interfere */
+.section-carousel .slide>* {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }
 
+/* Target all nested elements to ensure proper sizing */
+.section-carousel .slide>*>* {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
 .section-carousel .slide img {
-    max-width: 100%;
-    max-height: 50vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    /* Fill container completely */
 }
 
 .section-descriptions {

@@ -600,18 +600,15 @@ const Home = () => {
                   className={`slide fade ${currentSection === index ? "active" : ""}`}
                   aria-hidden={currentSection !== index}
                 >
-                  <ImagePreview fullImageSrc={slide.image} mobileEnabled={isMobile}>
-                    <Image
-                      src={slide.thumbnail || slide.image}
-                      alt={`${slide.title} - Feature ${index + 1}`}
-                      width={800}
-                      height={500}
-                      priority={index === 0}
-                      quality={85}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </ImagePreview>
+                  <Image
+                    src={`/${slide.thumbnail || slide.image}`}
+                    alt={`${slide.title} - Feature ${index + 1}`}
+                    fill
+                    sizes="(max-width: 1151px) 100vw, 0px"
+                    priority={index === 0}
+                    quality={85}
+                    style={{ objectFit: 'cover' }}
+                  />
                 </div>
               ))}
             </div>
