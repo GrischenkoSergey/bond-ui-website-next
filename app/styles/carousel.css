@@ -938,7 +938,7 @@
 
 /* More specific selector for section descriptions */
 .carousel-mobile.section-carousel .description-item-container.section-descriptions {
-    padding: 20px;
+    padding: 15px;
     min-height: 200px;
     text-align: center;
     position: relative;
@@ -955,10 +955,10 @@
 
 .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    width: calc(100% - 40px);
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
     height: auto;
     opacity: 0;
     transition: opacity 1s ease;
@@ -1010,13 +1010,14 @@
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 180px;
+        padding: 12px;
     }
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        width: calc(100% - 30px);
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        width: calc(100% - 24px);
     }
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
@@ -1047,11 +1048,14 @@
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 140px;
-        padding: 15px;
+        padding: 10px;
     }
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
-        top: 15px;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
     }
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
@@ -1070,7 +1074,14 @@
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions {
         min-height: 220px;
-        padding: 15px;
+        padding: 12px;
+    }
+
+    .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        width: calc(100% - 24px);
     }
 
     .carousel-mobile.section-carousel .description-item-container.section-descriptions .description-item h3 {
@@ -1183,7 +1194,7 @@
 }
 
 .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
-    padding: 20px;
+    padding: 15px;
     min-height: 200px;
     text-align: center;
     position: relative;
@@ -1200,10 +1211,10 @@
 
 .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    width: calc(100% - 40px);
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
     height: auto;
     opacity: 0;
     transition: opacity 1s ease;
@@ -1250,13 +1261,14 @@
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
         min-height: 180px;
+        padding: 12px;
     }
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        width: calc(100% - 30px);
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        width: calc(100% - 24px);
     }
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
@@ -1287,11 +1299,14 @@
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
         min-height: 140px;
-        padding: 15px;
+        padding: 10px;
     }
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
-        top: 15px;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
     }
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {
@@ -1310,7 +1325,14 @@
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
         min-height: 220px;
-        padding: 15px;
+        padding: 12px;
+    }
+
+    .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        width: calc(100% - 24px);
     }
 
     .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions .description-item h3 {

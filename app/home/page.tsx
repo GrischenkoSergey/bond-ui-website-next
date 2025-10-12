@@ -111,23 +111,23 @@ const Home = () => {
     {
       image: "images/word1blue.webp",
       thumbnail: "images/word1bluesmall.gif",
-      title: "Quick Command Bars",
+      title: "Quick Command Bars (QCBs)",
       description:
-        "Access commands with a single function key, customise your own Quick Command Bars (QCBs). 11 commands per QCB. Easy to add and edit commands. Rename QCBs, change display order, turn on and off individual QCBs, change number of QCBs displayed, from 1 to 12. Save your QCB settings as a standard .xml file.",
+        "Single function key access to commands. Customise your own QCBs with 11 commands each. Easy to add, edit, and rename. Display 1-12 QCBs. Save settings as .xml file.",
     },
     {
       image: "images/word1336i2.webp",
       thumbnail: "images/word1336i2small.gif",
       title: "Keyboard Drop Down Menu (KDDM)",
       description:
-        "Map your favourite commands to any key. Access the KDDM by pressing its menu function key, then press the key of the command you want. Super easy to add or change commands. Save your KDDM settings as a standard .xml file.",
+        "Map favourite commands to any key. Press the KDDM menu key, then press your command key. Simple to add and edit. Save settings as .xml file.",
     },
     {
       image: "images/word3a.webp",
       thumbnail: "images/word3asmall.gif",
       title: "New dialogue boxes use function keys to select commands.",
       description:
-        "Large, easy-to-select buttons — ideal for both mouse and touchscreen use. F12 key moves down to next sub-window, Escape key moves up to previous sub-window.",
+        "Large, easy-to-select buttons — ideal for both mouse and touchscreen use. F12 moves to the next sub-window, Escape moves to the previous sub-window.",
     },
     {
       image: "images/advancedfind.gif",
@@ -141,7 +141,7 @@ const Home = () => {
       thumbnail: "images/qcbaddcommandsmall.gif",
       title: "Quick Command Bars (QCBs)",
       description:
-        "Easily add custom commands to your QCBs. Press the function key of the command you wish to change: Select the new command from the standard drop down menu: The command is immediately added to the Quick Command Bar.",
+        "Easily add custom commands to your QCBs. Press the function key of the command you wish to change. Select the new command from the standard drop-down menu. The command is immediately added to the QCB.",
     },
     {
       image: "images/word5.webp",
@@ -543,16 +543,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-
-          {/* <div className="description-item-container section-descriptions">
-            {sectionCarouselSlides.map((slide, index) => (
-              <div key={index} className={`description-item ${currentSection === index ? "active" : ""}`} data-index={index}>
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-              </div>
-            ))}
-          </div> */}
-
 
           {/* Mobile slide counter */}
           <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
