@@ -901,20 +901,24 @@
 .section-carousel .slide>* {
     width: 100% !important;
     height: 100% !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+    display: block !important;
+    /* Changed from flex to block to avoid layout issues */
+    pointer-events: auto !important;
+    /* Ensure clicks pass through to ImagePreview */
 }
 
-/* Target all nested elements to ensure proper sizing */
-.section-carousel .slide>*>* {
+/* Target all nested elements to ensure proper sizing - but NOT inside preview modal */
+.section-carousel .slide>*>*:not(#section-carousel-preview *) {
     width: 100% !important;
     height: 100% !important;
     max-width: 100% !important;
     max-height: 100% !important;
+    pointer-events: auto !important;
+    display: block !important;
 }
 
-.section-carousel .slide img {
+/* Only constrain images that are in the carousel slide, not in preview */
+.section-carousel .slide img:not(#section-carousel-preview img) {
     width: 100% !important;
     height: 100% !important;
     max-width: 100% !important;
@@ -922,6 +926,17 @@
     object-fit: cover !important;
     display: block !important;
     /* Fill container completely */
+}
+
+/* Reset constraints for preview modal content */
+#section-carousel-preview img {
+    width: auto !important;
+    height: auto !important;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
 }
 
 .section-descriptions {

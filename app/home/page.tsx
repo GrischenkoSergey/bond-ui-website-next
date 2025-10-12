@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import Layout from "@/components/Layout"
 import ImagePreview from "@/components/ImagePreview"
+import CarouselImagePreview from "@/components/CarouselImagePreview"
 import { useIsMobile } from '@/hooks/use-mobile'
 
 const Home = () => {
@@ -306,7 +307,7 @@ const Home = () => {
   // Listen for preview mode changes
   useEffect(() => {
     const checkPreviewActive = () => {
-      const previewElement = document.querySelector('#preview-container, #preview-container2')
+      const previewElement = document.querySelector('#preview-container, #preview-container2, #section-carousel-preview')
       setIsPreviewActive(previewElement !== null && getComputedStyle(previewElement).visibility === 'visible')
     }
 
@@ -600,17 +601,35 @@ const Home = () => {
                   className={`slide fade ${currentSection === index ? "active" : ""}`}
                   aria-hidden={currentSection !== index}
                 >
-                  <ImagePreview fullImageSrc={`/${slide.image}`} mobileEnabled={isMobile}>
-                    <Image
-                      src={`/${slide.thumbnail || slide.image}`}
-                      alt={`${slide.title} - Feature ${index + 1}`}
-                      fill
-                      sizes="(max-width: 1151px) 100vw, 0px"
-                      priority={index === 0}
-                      quality={85}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </ImagePreview>
+                  {/* <ImagePreview fullImageSrc={`/${slide.image}`} mobileEnabled={isMobile}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                      <Image
+                        src={`/${slide.thumbnail || slide.image}`}
+                        alt={`${slide.title} - Feature ${index + 1}`}
+                        fill
+                        sizes="(max-width: 1151px) 100vw, 0px"
+                        priority={index === 0}
+                        quality={100}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  </ImagePreview> */}
+
+                  <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                      <Image
+                        src={`/${slide.thumbnail || slide.image}`}
+                        alt={`${slide.title} - Feature ${index + 1}`}
+                        fill
+                        sizes="(max-width: 1151px) 100vw, 0px"
+                        priority={index === 0}
+                        quality={100}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  </CarouselImagePreview>
                 </div>
               ))}
             </div>
