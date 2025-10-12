@@ -16,7 +16,6 @@ const CarouselImagePreview = ({ children, fullImageSrc }: CarouselImagePreviewPr
     const isDraggingRef = useRef(false)
 
     const showPreview = () => {
-        console.log("CarouselImagePreview: showPreview called", fullImageSrc)
         setIsVisible(true)
         setHasMoved(false)
         document.body.style.overflow = "hidden"

@@ -436,6 +436,7 @@ const Home = () => {
                   priority={index === 0}
                   quality={90}
                   loading={index === 0 ? "eager" : "lazy"}
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             ))}
@@ -510,7 +511,7 @@ const Home = () => {
                       priority={index === 0}
                       quality={90}
                       loading={index === 0 ? "eager" : "lazy"}
-                      style={{ objectFit: "cover" }}
+                      style={{ width: "auto", height: "auto", objectFit: "cover" }}
                     />
                   </ImagePreview>
                 </div>
