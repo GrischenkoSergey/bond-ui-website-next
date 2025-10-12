@@ -838,11 +838,16 @@
     /* Clip content to border-radius */
     border-radius: 10px;
     /* Ensure rounded corners match carousel-mobile */
+    display: flex;
+    flex-direction: column;
+    /* Stack image and description vertically */
 }
 
 .section-carousel .carousel-container {
-    height: 50vh;
-    /* Fixed height for image area */
+    flex: 1;
+    /* Take remaining space, pushing descriptions to bottom */
+    min-height: 40vh;
+    /* Minimum height for images */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -883,6 +888,8 @@
     /* White background for text readability */
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    flex-shrink: 0;
+    /* Prevent shrinking - always maintain minimum height */
 }
 
 .section-descriptions .description-item {
@@ -954,6 +961,11 @@
 @media (orientation: landscape) and (max-width: 1151px) {
     .section-carousel {
         min-height: 85vh;
+    }
+
+    .section-carousel .carousel-container {
+        min-height: 35vh;
+        /* Smaller image area in landscape */
     }
 
     .section-carousel .slide img {
