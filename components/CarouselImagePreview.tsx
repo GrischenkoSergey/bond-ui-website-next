@@ -110,6 +110,8 @@ const CarouselImagePreview = ({ children, fullImageSrc }: CarouselImagePreviewPr
                     >
                         <img
                             src={fullImageSrc || "/placeholder.svg"}
+                            decoding="async"
+                            loading="eager"
                             style={{
                                 width: "auto",
                                 minWidth: "100%",

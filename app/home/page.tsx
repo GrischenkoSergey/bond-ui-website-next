@@ -213,6 +213,7 @@ const Home = () => {
   const sectionCarouselRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const sectionIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const preloadedImagesRef = useRef<Set<string>>(new Set())
 
   const showSlide = useCallback((index: number) => {
     setCurrent(index)
@@ -242,6 +243,48 @@ const Home = () => {
   const goToSectionSlide = useCallback((index: number) => {
     setCurrentSection(index)
   }, [])
+
+  // Image preloading function for faster preview loading
+  const preloadImage = useCallback((src: string) => {
+    if (preloadedImagesRef.current.has(src)) {
+      return // Already preloaded
+    }
+
+    if (typeof window === 'undefined') return // Server-side rendering guard
+
+    const img = window.document.createElement('img')
+    img.decoding = 'async' // Use async decoding for better performance
+    img.fetchPriority = 'low' // Don't interfere with current slide
+    img.src = src
+
+    img.onload = () => {
+      preloadedImagesRef.current.add(src)
+    }
+  }, [])
+
+  // Preload current, next, and previous images for both carousels
+  useEffect(() => {
+    if (!isMobile) return // Only preload for mobile carousels
+
+    // Main mobile carousel preloading
+    const currentImg = `/${mobileSlides[current]?.image}`
+    const nextImg = `/${mobileSlides[(current + 1) % total]?.image}`
+    const prevImg = `/${mobileSlides[(current - 1 + total) % total]?.image}`
+
+    // Preload current and adjacent images
+    preloadImage(currentImg)
+    preloadImage(nextImg)
+    preloadImage(prevImg)
+
+    // Section carousel preloading
+    const currentSectionImg = `/${sectionCarouselSlides[currentSection]?.image}`
+    const nextSectionImg = `/${sectionCarouselSlides[(currentSection + 1) % totalSectionSlides]?.image}`
+    const prevSectionImg = `/${sectionCarouselSlides[(currentSection - 1 + totalSectionSlides) % totalSectionSlides]?.image}`
+
+    preloadImage(currentSectionImg)
+    preloadImage(nextSectionImg)
+    preloadImage(prevSectionImg)
+  }, [current, currentSection, isMobile, preloadImage, total, totalSectionSlides, mobileSlides, sectionCarouselSlides])
 
   // Keyboard navigation
   useEffect(() => {
