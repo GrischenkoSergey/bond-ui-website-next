@@ -917,6 +917,9 @@
     max-height: 100%;
     object-fit: cover;
     display: block;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: auto;
 }
 
 /* Preview modal content - separate specific selector */
@@ -1191,6 +1194,9 @@
     max-height: 100%;
     object-fit: cover;
     display: block;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: auto;
 }
 
 .carousel-mobile.main-mobile-carousel .description-item-container.mobile-descriptions {
