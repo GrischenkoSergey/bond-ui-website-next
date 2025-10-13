@@ -392,6 +392,94 @@ const Home = () => {
     return () => observer.disconnect()
   }, [])
 
+  // Touch swipe handlers for main mobile carousel
+  const handleMainTouchStart = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const touch = e.touches[0]
+    carouselRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString())
+    carouselRef.current?.setAttribute('data-touch-start-y', touch.clientY.toString())
+  }, [isPreviewActive])
+
+  const handleMainTouchMove = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const startX = parseFloat(carouselRef.current?.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const touch = e.touches[0]
+    const deltaX = touch.clientX - startX
+    const deltaY = touch.clientY - startY
+
+    // Prevent vertical scroll if horizontal swipe is detected
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+      e.preventDefault()
+    }
+  }, [isPreviewActive])
+
+  const handleMainTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const startX = parseFloat(carouselRef.current?.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const endX = e.changedTouches[0].clientX
+    const endY = e.changedTouches[0].clientY
+    const deltaX = endX - startX
+    const deltaY = endY - startY
+
+    // Only trigger swipe if horizontal movement is greater than vertical and exceeds threshold
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        prevSlide() // Swipe right = previous slide
+      } else {
+        nextSlide() // Swipe left = next slide
+      }
+    }
+
+    carouselRef.current?.removeAttribute('data-touch-start-x')
+    carouselRef.current?.removeAttribute('data-touch-start-y')
+  }, [isPreviewActive, prevSlide, nextSlide])
+
+  // Touch swipe handlers for section carousel
+  const handleSectionTouchStart = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const touch = e.touches[0]
+    sectionCarouselRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString())
+    sectionCarouselRef.current?.setAttribute('data-touch-start-y', touch.clientY.toString())
+  }, [isPreviewActive])
+
+  const handleSectionTouchMove = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const startX = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const touch = e.touches[0]
+    const deltaX = touch.clientX - startX
+    const deltaY = touch.clientY - startY
+
+    // Prevent vertical scroll if horizontal swipe is detected
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+      e.preventDefault()
+    }
+  }, [isPreviewActive])
+
+  const handleSectionTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (isPreviewActive) return
+    const startX = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const endX = e.changedTouches[0].clientX
+    const endY = e.changedTouches[0].clientY
+    const deltaX = endX - startX
+    const deltaY = endY - startY
+
+    // Only trigger swipe if horizontal movement is greater than vertical and exceeds threshold
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        prevSectionSlide() // Swipe right = previous slide
+      } else {
+        nextSectionSlide() // Swipe left = next slide
+      }
+    }
+
+    sectionCarouselRef.current?.removeAttribute('data-touch-start-x')
+    sectionCarouselRef.current?.removeAttribute('data-touch-start-y')
+  }, [isPreviewActive, prevSectionSlide, nextSectionSlide])
+
   if (!carouselSlides.length) return null
 
   return (
@@ -523,9 +611,13 @@ const Home = () => {
           <h1>Microsoft Word</h1>
         </div>
         <div
+          ref={carouselRef}
           className="carousel-mobile main-mobile-carousel"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleMainTouchStart}
+          onTouchMove={handleMainTouchMove}
+          onTouchEnd={handleMainTouchEnd}
           role="region"
           aria-label="Product showcase carousel"
           aria-live="polite"
@@ -637,6 +729,9 @@ const Home = () => {
           className="carousel-mobile section-carousel"
           onMouseEnter={handleSectionMouseEnter}
           onMouseLeave={handleSectionMouseLeave}
+          onTouchStart={handleSectionTouchStart}
+          onTouchMove={handleSectionTouchMove}
+          onTouchEnd={handleSectionTouchEnd}
           role="region"
           aria-label="Product features carousel"
           aria-live="polite"

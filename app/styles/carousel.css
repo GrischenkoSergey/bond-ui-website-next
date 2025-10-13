@@ -1361,3 +1361,19 @@
         line-height: 1.3;
     }
 }
+
+/* Touch swipe optimization for smooth gestures */
+.carousel-mobile {
+    touch-action: pan-y pinch-zoom;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-mobile .carousel-container {
+    touch-action: pan-y pinch-zoom;
+}
+
+.carousel-mobile .carousel-track {
+    touch-action: pan-y pinch-zoom;
+}
