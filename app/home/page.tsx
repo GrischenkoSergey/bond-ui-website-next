@@ -185,11 +185,25 @@ const Home = () => {
     showSlideCounter: true,         // Show "1 / 9" slide counter (disabled by default)
   }
 
+  // Page flip effect configuration
+  const enablePageFlipEffect = true  // Set to false to disable flip animation on swipe
+
+  // Flip effect enhancements
+  const flipEnhancements = {
+    enablePageShadow: true,      // Add subtle shadow during flip for depth effect
+    enableHapticFeedback: true,  // Vibrate on flip completion (mobile only)
+    enableNextSlidePeek: true,   // Show peek of next slide at bottom during flip
+  }
+
   const [current, setCurrent] = useState(0)
   const [currentSection, setCurrentSection] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isSectionPaused, setIsSectionPaused] = useState(false)
   const [isPreviewActive, setIsPreviewActive] = useState(false)
+  const [isMainFlipping, setIsMainFlipping] = useState(false)
+  const [isSectionFlipping, setIsSectionFlipping] = useState(false)
+  const [mainFlipDirection, setMainFlipDirection] = useState<'left' | 'right'>('left')
+  const [sectionFlipDirection, setSectionFlipDirection] = useState<'left' | 'right'>('left')
   const isMobile = useIsMobile()
   const carouselRef = useRef<HTMLDivElement>(null)
   const sectionCarouselRef = useRef<HTMLDivElement>(null)
@@ -392,93 +406,398 @@ const Home = () => {
     return () => observer.disconnect()
   }, [])
 
+  // Haptic feedback utility function
+  const triggerHapticFeedback = useCallback(() => {
+    if (!flipEnhancements.enableHapticFeedback) return
+
+    // Check if Vibration API is supported
+    if ('vibrate' in navigator) {
+      // Short, subtle vibration (20ms)
+      navigator.vibrate(20)
+    }
+  }, [flipEnhancements.enableHapticFeedback])
+
   // Touch swipe handlers for main mobile carousel
   const handleMainTouchStart = useCallback((e: React.TouchEvent) => {
-    if (isPreviewActive) return
+    if (isPreviewActive || !enablePageFlipEffect) return
     const touch = e.touches[0]
-    carouselRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString())
-    carouselRef.current?.setAttribute('data-touch-start-y', touch.clientY.toString())
-  }, [isPreviewActive])
+    const carousel = carouselRef.current
+    if (!carousel) return
+
+    carousel.setAttribute('data-touch-start-x', touch.clientX.toString())
+    carousel.setAttribute('data-touch-start-y', touch.clientY.toString())
+    carousel.setAttribute('data-is-dragging', 'false')
+  }, [isPreviewActive, enablePageFlipEffect])
 
   const handleMainTouchMove = useCallback((e: React.TouchEvent) => {
     if (isPreviewActive) return
-    const startX = parseFloat(carouselRef.current?.getAttribute('data-touch-start-x') || '0')
-    const startY = parseFloat(carouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const carousel = carouselRef.current
+    if (!carousel) return
+
+    const startX = parseFloat(carousel.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carousel.getAttribute('data-touch-start-y') || '0')
     const touch = e.touches[0]
     const deltaX = touch.clientX - startX
     const deltaY = touch.clientY - startY
 
-    // Prevent vertical scroll if horizontal swipe is detected
+    // Check if this is a horizontal swipe
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
       e.preventDefault()
+
+      if (enablePageFlipEffect) {
+        carousel.setAttribute('data-is-dragging', 'true')
+
+        // Get carousel width for calculating rotation
+        const carouselWidth = carousel.offsetWidth
+
+        // Calculate rotation angle based on drag distance (0 to 90 degrees)
+        // Max rotation at 70% of screen width
+        const maxDragDistance = carouselWidth * 0.7
+        const dragProgress = Math.min(Math.abs(deltaX) / maxDragDistance, 1)
+        const rotationAngle = dragProgress * 90 // 0 to 90 degrees
+
+        // Calculate opacity (1 to 0.3 as rotation increases)
+        const opacity = 1 - (dragProgress * 0.7)
+
+        // Calculate shadow intensity (0 to 1 as rotation increases)
+        const shadowIntensity = flipEnhancements.enablePageShadow ? dragProgress * 0.5 : 0
+
+        // Find the carousel track and container
+        const track = carousel.querySelector('.carousel-track') as HTMLElement
+        const container = carousel.querySelector('.carousel-container') as HTMLElement
+
+        if (track) {
+          // Apply the rotation based on swipe direction
+          if (deltaX < 0) {
+            // Swiping left (next slide)
+            track.style.transform = `perspective(1000px) rotateY(-${rotationAngle}deg)`
+            track.style.opacity = opacity.toString()
+
+            // Add dynamic shadow on the left edge (page lifting)
+            if (flipEnhancements.enablePageShadow) {
+              track.style.boxShadow = `-10px 0 ${20 + (shadowIntensity * 30)}px rgba(0, 0, 0, ${0.2 + shadowIntensity})`
+            }
+
+            setMainFlipDirection('left')
+          } else {
+            // Swiping right (previous slide)
+            track.style.transform = `perspective(1000px) rotateY(${rotationAngle}deg)`
+            track.style.opacity = opacity.toString()
+
+            // Add dynamic shadow on the right edge
+            if (flipEnhancements.enablePageShadow) {
+              track.style.boxShadow = `10px 0 ${20 + (shadowIntensity * 30)}px rgba(0, 0, 0, ${0.2 + shadowIntensity})`
+            }
+
+            setMainFlipDirection('right')
+          }
+          track.style.transition = 'none' // Disable transition during drag
+        }
+
+        // Show peek of next slide at bottom
+        if (flipEnhancements.enableNextSlidePeek && container && dragProgress > 0.3) {
+          // Calculate peek amount (0 to 30px as drag progresses)
+          const peekAmount = Math.min((dragProgress - 0.3) / 0.7, 1) * 30
+          container.style.transform = `translateY(-${peekAmount}px)`
+          container.style.transition = 'none'
+        }
+      }
     }
-  }, [isPreviewActive])
+  }, [isPreviewActive, enablePageFlipEffect])
 
   const handleMainTouchEnd = useCallback((e: React.TouchEvent) => {
     if (isPreviewActive) return
-    const startX = parseFloat(carouselRef.current?.getAttribute('data-touch-start-x') || '0')
-    const startY = parseFloat(carouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const carousel = carouselRef.current
+    if (!carousel) return
+
+    const startX = parseFloat(carousel.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carousel.getAttribute('data-touch-start-y') || '0')
     const endX = e.changedTouches[0].clientX
     const endY = e.changedTouches[0].clientY
     const deltaX = endX - startX
     const deltaY = endY - startY
+    const isDragging = carousel.getAttribute('data-is-dragging') === 'true'
+
+    const track = carousel.querySelector('.carousel-track') as HTMLElement
 
     // Only trigger swipe if horizontal movement is greater than vertical and exceeds threshold
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-      if (deltaX > 0) {
-        prevSlide() // Swipe right = previous slide
-      } else {
-        nextSlide() // Swipe left = next slide
+      if (enablePageFlipEffect && isDragging) {
+        // Complete the flip animation
+        setIsMainFlipping(true)
+
+        if (track) {
+          // Re-enable transition for completion animation
+          track.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out'
+
+          // Complete the flip to -90 or +90 degrees
+          if (deltaX < 0) {
+            track.style.transform = 'perspective(1000px) rotateY(-90deg)'
+            track.style.opacity = '0.3'
+          } else {
+            track.style.transform = 'perspective(1000px) rotateY(90deg)'
+            track.style.opacity = '0.3'
+          }
+        }
+
+        // Change slide at midpoint and reset
+        setTimeout(() => {
+          if (deltaX > 0) {
+            prevSlide()
+          } else {
+            nextSlide()
+          }
+
+          // Trigger haptic feedback on successful flip
+          triggerHapticFeedback()
+
+          // Reset the transform and shadow
+          if (track) {
+            track.style.transform = ''
+            track.style.opacity = ''
+            track.style.transition = ''
+            track.style.boxShadow = ''
+          }
+
+          // Reset peek effect
+          const container = carousel.querySelector('.carousel-container') as HTMLElement
+          if (container && flipEnhancements.enableNextSlidePeek) {
+            container.style.transform = ''
+            container.style.transition = ''
+          }
+
+          setTimeout(() => setIsMainFlipping(false), 50)
+        }, 300)
+      } else if (!enablePageFlipEffect) {
+        // No flip effect, instant transition
+        if (deltaX > 0) {
+          prevSlide()
+        } else {
+          nextSlide()
+        }
+      }
+    } else {
+      // Swipe cancelled or too short - snap back
+      if (track && isDragging) {
+        track.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out, box-shadow 0.2s ease-out'
+        track.style.transform = 'perspective(1000px) rotateY(0deg)'
+        track.style.opacity = '1'
+        track.style.boxShadow = ''
+
+        // Reset peek effect
+        const container = carousel.querySelector('.carousel-container') as HTMLElement
+        if (container && flipEnhancements.enableNextSlidePeek) {
+          container.style.transition = 'transform 0.2s ease-out'
+          container.style.transform = ''
+        }
+
+        setTimeout(() => {
+          track.style.transform = ''
+          track.style.opacity = ''
+          track.style.transition = ''
+          track.style.boxShadow = ''
+          if (container) {
+            container.style.transform = ''
+            container.style.transition = ''
+          }
+        }, 200)
       }
     }
 
-    carouselRef.current?.removeAttribute('data-touch-start-x')
-    carouselRef.current?.removeAttribute('data-touch-start-y')
-  }, [isPreviewActive, prevSlide, nextSlide])
+    carousel.removeAttribute('data-touch-start-x')
+    carousel.removeAttribute('data-touch-start-y')
+    carousel.removeAttribute('data-is-dragging')
+  }, [isPreviewActive, prevSlide, nextSlide, enablePageFlipEffect, triggerHapticFeedback])
 
   // Touch swipe handlers for section carousel
   const handleSectionTouchStart = useCallback((e: React.TouchEvent) => {
-    if (isPreviewActive) return
+    if (isPreviewActive || !enablePageFlipEffect) return
     const touch = e.touches[0]
-    sectionCarouselRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString())
-    sectionCarouselRef.current?.setAttribute('data-touch-start-y', touch.clientY.toString())
-  }, [isPreviewActive])
+    const carousel = sectionCarouselRef.current
+    if (!carousel) return
+
+    carousel.setAttribute('data-touch-start-x', touch.clientX.toString())
+    carousel.setAttribute('data-touch-start-y', touch.clientY.toString())
+    carousel.setAttribute('data-is-dragging', 'false')
+  }, [isPreviewActive, enablePageFlipEffect])
 
   const handleSectionTouchMove = useCallback((e: React.TouchEvent) => {
     if (isPreviewActive) return
-    const startX = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-x') || '0')
-    const startY = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const carousel = sectionCarouselRef.current
+    if (!carousel) return
+
+    const startX = parseFloat(carousel.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carousel.getAttribute('data-touch-start-y') || '0')
     const touch = e.touches[0]
     const deltaX = touch.clientX - startX
     const deltaY = touch.clientY - startY
 
-    // Prevent vertical scroll if horizontal swipe is detected
+    // Check if this is a horizontal swipe
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
       e.preventDefault()
+
+      if (enablePageFlipEffect) {
+        carousel.setAttribute('data-is-dragging', 'true')
+
+        // Get carousel width for calculating rotation
+        const carouselWidth = carousel.offsetWidth
+
+        // Calculate rotation angle based on drag distance (0 to 90 degrees)
+        const maxDragDistance = carouselWidth * 0.7
+        const dragProgress = Math.min(Math.abs(deltaX) / maxDragDistance, 1)
+        const rotationAngle = dragProgress * 90
+
+        // Calculate opacity
+        const opacity = 1 - (dragProgress * 0.7)
+
+        // Calculate shadow intensity (0 to 1 as rotation increases)
+        const shadowIntensity = flipEnhancements.enablePageShadow ? dragProgress * 0.5 : 0
+
+        // Find the carousel track and container
+        const track = carousel.querySelector('.carousel-track') as HTMLElement
+        const container = carousel.querySelector('.carousel-container') as HTMLElement
+
+        if (track) {
+          // Apply the rotation based on swipe direction
+          if (deltaX < 0) {
+            // Swiping left (next slide)
+            track.style.transform = `perspective(1000px) rotateY(-${rotationAngle}deg)`
+            track.style.opacity = opacity.toString()
+
+            // Add dynamic shadow on the left edge (page lifting)
+            if (flipEnhancements.enablePageShadow) {
+              track.style.boxShadow = `-10px 0 ${20 + (shadowIntensity * 30)}px rgba(0, 0, 0, ${0.2 + shadowIntensity})`
+            }
+
+            setSectionFlipDirection('left')
+          } else {
+            // Swiping right (previous slide)
+            track.style.transform = `perspective(1000px) rotateY(${rotationAngle}deg)`
+            track.style.opacity = opacity.toString()
+
+            // Add dynamic shadow on the right edge
+            if (flipEnhancements.enablePageShadow) {
+              track.style.boxShadow = `10px 0 ${20 + (shadowIntensity * 30)}px rgba(0, 0, 0, ${0.2 + shadowIntensity})`
+            }
+
+            setSectionFlipDirection('right')
+          }
+          track.style.transition = 'none'
+        }
+
+        // Show peek of next slide at bottom
+        if (flipEnhancements.enableNextSlidePeek && container && dragProgress > 0.3) {
+          // Calculate peek amount (0 to 30px as drag progresses)
+          const peekAmount = Math.min((dragProgress - 0.3) / 0.7, 1) * 30
+          container.style.transform = `translateY(-${peekAmount}px)`
+          container.style.transition = 'none'
+        }
+      }
     }
-  }, [isPreviewActive])
+  }, [isPreviewActive, enablePageFlipEffect])
 
   const handleSectionTouchEnd = useCallback((e: React.TouchEvent) => {
     if (isPreviewActive) return
-    const startX = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-x') || '0')
-    const startY = parseFloat(sectionCarouselRef.current?.getAttribute('data-touch-start-y') || '0')
+    const carousel = sectionCarouselRef.current
+    if (!carousel) return
+
+    const startX = parseFloat(carousel.getAttribute('data-touch-start-x') || '0')
+    const startY = parseFloat(carousel.getAttribute('data-touch-start-y') || '0')
     const endX = e.changedTouches[0].clientX
     const endY = e.changedTouches[0].clientY
     const deltaX = endX - startX
     const deltaY = endY - startY
+    const isDragging = carousel.getAttribute('data-is-dragging') === 'true'
+
+    const track = carousel.querySelector('.carousel-track') as HTMLElement
 
     // Only trigger swipe if horizontal movement is greater than vertical and exceeds threshold
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-      if (deltaX > 0) {
-        prevSectionSlide() // Swipe right = previous slide
-      } else {
-        nextSectionSlide() // Swipe left = next slide
+      if (enablePageFlipEffect && isDragging) {
+        // Complete the flip animation
+        setIsSectionFlipping(true)
+
+        if (track) {
+          track.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out'
+
+          // Complete the flip to -90 or +90 degrees
+          if (deltaX < 0) {
+            track.style.transform = 'perspective(1000px) rotateY(-90deg)'
+            track.style.opacity = '0.3'
+          } else {
+            track.style.transform = 'perspective(1000px) rotateY(90deg)'
+            track.style.opacity = '0.3'
+          }
+        }
+
+        // Change slide at midpoint and reset
+        setTimeout(() => {
+          if (deltaX > 0) {
+            prevSectionSlide()
+          } else {
+            nextSectionSlide()
+          }
+
+          // Trigger haptic feedback on successful flip
+          triggerHapticFeedback()
+
+          // Reset the transform and shadow
+          if (track) {
+            track.style.transform = ''
+            track.style.opacity = ''
+            track.style.transition = ''
+            track.style.boxShadow = ''
+          }
+
+          // Reset peek effect
+          const container = carousel.querySelector('.carousel-container') as HTMLElement
+          if (container && flipEnhancements.enableNextSlidePeek) {
+            container.style.transform = ''
+            container.style.transition = ''
+          }
+
+          setTimeout(() => setIsSectionFlipping(false), 50)
+        }, 300)
+      } else if (!enablePageFlipEffect) {
+        // No flip effect, instant transition
+        if (deltaX > 0) {
+          prevSectionSlide()
+        } else {
+          nextSectionSlide()
+        }
+      }
+    } else {
+      // Swipe cancelled or too short - snap back
+      if (track && isDragging) {
+        track.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out, box-shadow 0.2s ease-out'
+        track.style.transform = 'perspective(1000px) rotateY(0deg)'
+        track.style.opacity = '1'
+        track.style.boxShadow = ''
+
+        // Reset peek effect
+        const container = carousel.querySelector('.carousel-container') as HTMLElement
+        if (container && flipEnhancements.enableNextSlidePeek) {
+          container.style.transition = 'transform 0.2s ease-out'
+          container.style.transform = ''
+        }
+
+        setTimeout(() => {
+          track.style.transform = ''
+          track.style.opacity = ''
+          track.style.transition = ''
+          track.style.boxShadow = ''
+          if (container) {
+            container.style.transform = ''
+            container.style.transition = ''
+          }
+        }, 200)
       }
     }
 
-    sectionCarouselRef.current?.removeAttribute('data-touch-start-x')
-    sectionCarouselRef.current?.removeAttribute('data-touch-start-y')
-  }, [isPreviewActive, prevSectionSlide, nextSectionSlide])
+    carousel.removeAttribute('data-touch-start-x')
+    carousel.removeAttribute('data-touch-start-y')
+    carousel.removeAttribute('data-is-dragging')
+  }, [isPreviewActive, prevSectionSlide, nextSectionSlide, enablePageFlipEffect, triggerHapticFeedback])
 
   if (!carouselSlides.length) return null
 
@@ -575,7 +894,7 @@ const Home = () => {
             ))}
           </div>
 
-          <div className="carousel-track">
+          <div className={`carousel-track ${isMainFlipping ? `flipping flip-${mainFlipDirection}` : ''}`}>
             {carouselSlides.map((slide, index) => (
               <div
                 key={index}
@@ -674,7 +993,7 @@ const Home = () => {
           )}
 
           <div className="carousel-container">
-            <div className="carousel-track">
+            <div className={`carousel-track ${isMainFlipping ? `flipping flip-${mainFlipDirection}` : ''}`}>
               {mobileSlides.map((slide, index) => (
                 <div
                   key={index}
@@ -788,7 +1107,7 @@ const Home = () => {
           )}
 
           <div className="carousel-container">
-            <div className="carousel-track">
+            <div className={`carousel-track ${isSectionFlipping ? `flipping flip-${sectionFlipDirection}` : ''}`}>
               {sectionCarouselSlides.map((slide, index) => (
                 <div
                   key={index}
@@ -832,7 +1151,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word2asmall.gif"
+                  src="/images/word2asmall-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and QCB"
                   width={800}
@@ -861,7 +1180,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word1bluesmall.gif"
+                  src="/images/word1bluesmall-section.webp"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -893,7 +1212,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word1336i2small.gif"
+                  src="/images/word1336i2small-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -924,7 +1243,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word3asmall.gif"
+                  src="/images/word3asmall-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and QCB"
                   width={800}
@@ -947,11 +1266,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="/images/advancedfind.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/advancedfind.avifs" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word6small.gif"
+                  src="/images/word6small-section.webp"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -976,11 +1295,11 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="/images/qcbaddcommand2.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/qcbaddcommand2.avifs" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/qcbaddcommandsmall.gif"
+                  src="/images/qcbaddcommandsmall-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -1011,7 +1330,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word5small.gif"
+                  src="/images/word5small-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -1042,7 +1361,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word6small2.gif"
+                  src="/images/word6small-section.webp"
                   className="slide-image"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}
@@ -1068,7 +1387,7 @@ const Home = () => {
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
-                  src="/images/word7small.gif"
+                  src="/images/word7small-section.webp"
                   className="slide-image2"
                   alt="Word Add-in Menu Bar and Drop Down Menu With Flyout Menu"
                   width={800}

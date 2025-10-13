@@ -1377,3 +1377,42 @@
 .carousel-mobile .carousel-track {
     touch-action: pan-y pinch-zoom;
 }
+
+/* ============================================
+   PAGE FLIP EFFECT FOR SWIPE GESTURES (INTERACTIVE)
+   ============================================ */
+
+/* Enable 3D transforms for carousel tracks */
+.carousel-mobile .carousel-track {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Ensure slides maintain their appearance during flip */
+.carousel-mobile .carousel-track .slide {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* GPU acceleration for smoother animations */
+.carousel-mobile .carousel-track {
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Prevent image distortion during flip */
+.carousel-mobile .carousel-track .slide img {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Smooth cursor interaction */
+.carousel-mobile .carousel-track {
+    cursor: grab;
+}
+
+.carousel-mobile .carousel-track:active {
+    cursor: grabbing;
+}

@@ -1,0 +1,1 @@
+Can you implement effects with 'Mobile Support' set to Excellent or OK (in Comparison Chart) and provide me with a enum in the code so that I can test them all separately by changing the variable? You can create additional files if needed to simplify the logic of '\home\page.tsx' and 'carousel.css'.

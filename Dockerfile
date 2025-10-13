@@ -31,6 +31,12 @@ RUN pnpm build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Install sharp dependencies for image optimization
+RUN apk add --no-cache \
+    libc6-compat \
+    libstdc++ \
+    vips-dev
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -42,6 +48,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+# Copy sharp module for image optimization (required for standalone mode)
+COPY --from=builder /app/node_modules/sharp ./node_modules/sharp
 
 # Set correct permissions
 RUN chown -R nextjs:nodejs /app
