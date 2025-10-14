@@ -28,6 +28,8 @@
     background-color: #eee6c6;
     box-shadow: 0 0 11px 0 #aaaaaa;
     transition: all 0.3s ease;
+    min-height: 506px;
+    /* 253px image + 253px min content */
 }
 
 .dark .section,
@@ -43,6 +45,32 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 30px;
+    text-align: center;
+}
+
+/* Section card text styling - match carousel style */
+.sub-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: rgb(60, 60, 0);
+    display: block;
+}
+
+.dark .sub-section h2 {
+    color: rgb(255, 255, 102);
+}
+
+.sub-section p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: oklch(0.145 0 0);
+    display: block;
+}
+
+.dark .sub-section p {
+    color: oklch(0.985 0 0);
 }
 
 .sectionmanual {
@@ -89,6 +117,7 @@
 
 .image-wrapper {
     position: relative;
+    height: 253px;
     transition: all 0.5s;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -97,7 +126,7 @@
 
 .image-container {
     width: 100%;
-    height: auto;
+    height: 253px;
     overflow: hidden;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -105,8 +134,10 @@
 
 .image-container img {
     width: 100%;
-    height: auto;
+    height: 253px;
     display: block;
+    object-fit: cover;
+    object-position: top left;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -120,15 +151,15 @@
 }
 
 .slide-image {
-    width: auto;
-    height: 100%;
+    width: 411px;
+    height: 253px;
     display: block;
     object-fit: cover;
-    object-position: left;
+    object-position: top left;
 }
 
 .slide-image2 {
-    width: auto;
+    width: 411px;
     height: 253px;
     display: block;
     object-fit: cover;

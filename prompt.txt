@@ -1,1 +1,4 @@
 Can you implement effects with 'Mobile Support' set to Excellent or OK (in Comparison Chart) and provide me with a enum in the code so that I can test them all separately by changing the variable? You can create additional files if needed to simplify the logic of '\home\page.tsx' and 'carousel.css'.
+
+
+I get the following runtime error in production:  ⨯ Error: 'sharp' is required to be installed in standalone mode for the image optimization to function correctly. Read more at: https://nextjs.org/docs/messages/sharp-missing-in-production

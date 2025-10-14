@@ -204,7 +204,7 @@
     .image-wrapper {
         position: relative;
         overflow: hidden;
-        height: auto;
+        height: 253px;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
         display: block;
@@ -216,10 +216,10 @@
     .image-wrapper img.slide-image,
     .image-wrapper img.slide-image2 {
         width: 100%;
-        height: auto;
-        max-width: 100%;
+        height: 253px;
         display: block;
-        vertical-align: top;
+        object-fit: cover;
+        object-position: top left;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
     }
@@ -235,7 +235,7 @@
 
     .image-container {
         width: 100%;
-        height: auto;
+        height: 253px;
         overflow: hidden;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
@@ -246,12 +246,12 @@
 
     .image-container img {
         width: 100%;
-        height: auto;
+        height: 253px;
         display: block;
+        object-fit: cover;
+        object-position: top left;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
-        max-width: 100%;
-        vertical-align: top;
     }
 
     /* Mobile Sub-sections */
@@ -259,24 +259,36 @@
         background-color: #28013e;
         transition: background-color 1s ease;
         height: auto;
-        min-height: 200px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        padding: 20px;
+        padding: 15px;
         width: 100%;
         box-sizing: border-box;
+        text-align: center;
     }
 
     .sub-section h2 {
         font-size: 1.3rem;
+        font-weight: 600;
         margin-bottom: 15px;
-        color: #ffff66;
+        color: rgb(60, 60, 0);
+        display: block;
+    }
+
+    .dark .sub-section h2 {
+        color: rgb(255, 255, 102);
     }
 
     .sub-section p {
         font-size: 1.1rem;
         line-height: 1.5;
         margin-bottom: 10px;
+        color: oklch(0.145 0 0);
+        display: block;
+    }
+
+    .dark .sub-section p {
+        color: oklch(0.985 0 0);
     }
 
     /* Mobile Footer */
@@ -452,20 +464,21 @@
     }
 
     .image-wrapper {
-        min-height: 200px;
+        height: 253px;
     }
 
     .sub-section {
-        padding: 15px;
-        min-height: 150px;
+        padding: 12px;
     }
 
     .sub-section h2 {
         font-size: 1.2rem;
+        font-weight: 600;
     }
 
     .sub-section p {
         font-size: 1rem;
+        line-height: 1.5;
     }
 }
 
@@ -628,7 +641,7 @@
     }
 
     .image-wrapper {
-        min-height: 220px;
+        height: 253px;
     }
 }
 
@@ -643,7 +656,7 @@
     }
 
     .image-wrapper {
-        min-height: unset;
+        height: 253px;
     }
 }
 
@@ -662,20 +675,21 @@
     }
 
     .image-wrapper {
-        min-height: 200px;
+        height: 253px;
     }
 
     .sub-section {
-        padding: 15px;
-        min-height: 150px;
+        padding: 12px;
     }
 
     .sub-section h2 {
         font-size: 1.2rem;
+        font-weight: 600;
     }
 
     .sub-section p {
         font-size: 1rem;
+        line-height: 1.5;
     }
 }
 
@@ -691,30 +705,31 @@
     }
 
     .image-wrapper {
-        min-height: unset;
-        height: auto;
+        height: 253px;
         background-color: #efeeee;
     }
 
     .image-wrapper img.slide-image,
     .image-wrapper img.slide-image2 {
         width: 100%;
-        height: auto;
+        height: 253px;
         display: block;
+        object-fit: cover;
+        object-position: top left;
     }
 
     .sub-section {
-        padding: 15px;
-        min-height: 150px;
+        padding: 12px;
     }
 
     .sub-section h2 {
         font-size: 1.1rem;
+        font-weight: 600;
     }
 
     .sub-section p {
         font-size: 0.95rem;
-        line-height: 1.4;
+        line-height: 1.5;
     }
 }
 
@@ -731,23 +746,23 @@
     }
 
     .image-wrapper {
-        min-height: unset;
+        height: 253px;
         background-color: #efeeee;
     }
 
     .sub-section {
-        padding: 12px;
-        min-height: 120px;
+        padding: 10px;
     }
 
     .sub-section h2 {
         font-size: 1rem;
+        font-weight: 600;
         margin-bottom: 10px;
     }
 
     .sub-section p {
         font-size: 0.9rem;
-        line-height: 1.3;
+        line-height: 1.5;
     }
 }
 
@@ -781,6 +796,7 @@
 
     .image-wrapper {
         min-height: unset;
+        max-height: 253px;
     }
 
     .sub-section {
@@ -807,21 +823,23 @@
     }
 
     .image-wrapper {
-        min-height: 200px;
-        max-height: 50vh;
+        height: 253px;
+        overflow: hidden;
     }
 
     .image-wrapper img.slide-image,
     .image-wrapper img.slide-image2 {
-        max-height: 50vh;
         width: 100%;
-        height: auto;
+        height: 253px;
+        object-fit: cover;
+        object-position: top left;
     }
 
     .sub-section {
         padding: 20px;
         width: 100%;
         box-sizing: border-box;
+        text-align: center;
     }
 }
 
@@ -851,26 +869,21 @@
     }
 
     .image-wrapper {
-        min-height: unset;
-        max-height: none;
+        height: 253px;
         overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
     }
 
     .image-wrapper img.slide-image,
     .image-wrapper img.slide-image2 {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: none;
-        object-fit: contain;
+        width: 100%;
+        height: 253px;
+        object-fit: cover;
+        object-position: top left;
     }
 
     .sub-section {
         padding: 20px;
-        min-height: 180px;
+        text-align: center;
     }
 
     .manual-image-container {
