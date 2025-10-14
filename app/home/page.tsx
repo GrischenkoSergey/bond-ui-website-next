@@ -170,6 +170,14 @@ const Home = () => {
   const total = carouselSlides.length
   const totalSectionSlides = sectionCarouselSlides.length
 
+  // ========================================
+  // Feature configuration
+  // ========================================
+  // Set to false to hide the STATIC section cards grid on mobile devices
+  // Note: The section CAROUSEL is always visible on mobile
+  // When false: Hides the duplicate static section cards grid below the carousel
+  const showSectionCardsOnMobile = false
+
   // Mobile carousel UI controls (only for mobile mode)
   const mobileCarouselControls = {
     showNavigationButtons: true,    // Show prev/next arrow buttons
@@ -644,108 +652,110 @@ const Home = () => {
         <Link className="buynow" href="/buynow"></Link>
       </div>
 
-      {/* Section Features Carousel - Mobile Only */}
-      <div id="mobile-view">
-        <div
-          ref={sectionCarouselRef}
-          className="carousel-mobile section-carousel"
-          onMouseEnter={handleSectionMouseEnter}
-          onMouseLeave={handleSectionMouseLeave}
-          role="region"
-          aria-label="Product features carousel"
-          aria-live="polite"
-        >
-          <div className="carousel-functions">
-            {/* Navigation buttons - conditionally rendered */}
-            {sectionCarouselControls.showNavigationButtons && (
-              <>
-                <button
-                  className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
-                  onClick={prevSectionSlide}
-                  aria-label="Previous slide"
-                >
-                  ❮
-                </button>
-                <button
-                  className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
-                  onClick={nextSectionSlide}
-                  aria-label="Next slide"
-                >
-                  ❯
-                </button>
-              </>
-            )}
-
-            {/* Mobile progress indicators - conditionally rendered */}
-            {sectionCarouselControls.showProgressDots && (
-              <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
-                {sectionCarouselSlides.map((_, index) => (
+      {/* Section Features Carousel - Mobile Only - Always visible on mobile */}
+      {isMobile && (
+        <div id="mobile-view">
+          <div
+            ref={sectionCarouselRef}
+            className="carousel-mobile section-carousel"
+            onMouseEnter={handleSectionMouseEnter}
+            onMouseLeave={handleSectionMouseLeave}
+            role="region"
+            aria-label="Product features carousel"
+            aria-live="polite"
+          >
+            <div className="carousel-functions">
+              {/* Navigation buttons - conditionally rendered */}
+              {sectionCarouselControls.showNavigationButtons && (
+                <>
                   <button
-                    key={index}
-                    className={`progress-dot ${currentSection === index ? "active" : ""}`}
-                    onClick={() => goToSectionSlide(index)}
-                    aria-label={`Go to slide ${index + 1}`}
-                    aria-current={currentSection === index ? "true" : "false"}
-                  />
-                ))}
+                    className={`carousel-btn prev ${isPreviewActive ? 'hidden' : ''}`}
+                    onClick={prevSectionSlide}
+                    aria-label="Previous slide"
+                  >
+                    ❮
+                  </button>
+                  <button
+                    className={`carousel-btn next ${isPreviewActive ? 'hidden' : ''}`}
+                    onClick={nextSectionSlide}
+                    aria-label="Next slide"
+                  >
+                    ❯
+                  </button>
+                </>
+              )}
+
+              {/* Mobile progress indicators - conditionally rendered */}
+              {sectionCarouselControls.showProgressDots && (
+                <div className={`carousel-progress-mobile ${isPreviewActive ? 'hidden' : ''}`}>
+                  {sectionCarouselSlides.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`progress-dot ${currentSection === index ? "active" : ""}`}
+                      onClick={() => goToSectionSlide(index)}
+                      aria-label={`Go to slide ${index + 1}`}
+                      aria-current={currentSection === index ? "true" : "false"}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Slide counter - conditionally rendered */}
+            {sectionCarouselControls.showSlideCounter && (
+              <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
+                {currentSection + 1} / {sectionCarouselSlides.length}
               </div>
             )}
-          </div>
 
-          {/* Slide counter - conditionally rendered */}
-          {sectionCarouselControls.showSlideCounter && (
-            <div className={`carousel-counter-mobile ${isPreviewActive ? 'hidden' : ''}`} aria-live="polite" aria-atomic="true">
-              {currentSection + 1} / {sectionCarouselSlides.length}
+            {/* Pause indicator - conditionally rendered */}
+            {sectionCarouselControls.showPauseIndicator && isSectionPaused && autoPlay && !isPreviewActive && (
+              <div className="carousel-pause-indicator" aria-live="polite">
+                <span>⏸ Paused</span>
+              </div>
+            )}
+
+            <div className="carousel-container" {...sectionSwipeHandlers}>
+              <div className="carousel-track">
+                {sectionCarouselSlides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`slide fade ${currentSection === index ? "active" : ""}`}
+                    aria-hidden={currentSection !== index}
+                  >
+                    <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
+                      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                        <Image
+                          src={`/${slide.thumbnail || slide.image}`}
+                          alt={`${slide.title} - Feature ${index + 1}`}
+                          fill
+                          sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, (max-width: 768px) 720px, (max-width: 1024px) 980px, (max-width: 1151px) 1100px, 0px"
+                          priority={index === 0 || index === currentSection || index === (currentSection + 1) % totalSectionSlides || index === (currentSection - 1 + totalSectionSlides) % totalSectionSlides}
+                          quality={85}
+                          loading="eager"
+                          unoptimized={false}
+                          style={{ objectFit: 'cover', objectPosition: 'top left' }}
+                        />
+                      </div>
+                    </CarouselImagePreview>
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
 
-          {/* Pause indicator - conditionally rendered */}
-          {sectionCarouselControls.showPauseIndicator && isSectionPaused && autoPlay && !isPreviewActive && (
-            <div className="carousel-pause-indicator" aria-live="polite">
-              <span>⏸ Paused</span>
-            </div>
-          )}
-
-          <div className="carousel-container" {...sectionSwipeHandlers}>
-            <div className="carousel-track">
+            <div className="description-item-container section-descriptions">
               {sectionCarouselSlides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`slide fade ${currentSection === index ? "active" : ""}`}
-                  aria-hidden={currentSection !== index}
-                >
-                  <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
-                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                      <Image
-                        src={`/${slide.thumbnail || slide.image}`}
-                        alt={`${slide.title} - Feature ${index + 1}`}
-                        fill
-                        sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, (max-width: 768px) 720px, (max-width: 1024px) 980px, (max-width: 1151px) 1100px, 0px"
-                        priority={index === 0 || index === currentSection || index === (currentSection + 1) % totalSectionSlides || index === (currentSection - 1 + totalSectionSlides) % totalSectionSlides}
-                        quality={85}
-                        loading="eager"
-                        unoptimized={false}
-                        style={{ objectFit: 'cover', objectPosition: 'top left' }}
-                      />
-                    </div>
-                  </CarouselImagePreview>
+                <div key={index} className={`description-item ${currentSection === index ? "active" : ""}`} data-index={index}>
+                  <h3>{slide.title}</h3>
+                  <p>{slide.description}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="description-item-container section-descriptions">
-            {sectionCarouselSlides.map((slide, index) => (
-              <div key={index} className={`description-item ${currentSection === index ? "active" : ""}`} data-index={index}>
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
-      </div>
+      )}
 
-      <div className="sectionrow">
+      <div className="sectionrow" style={isMobile && !showSectionCardsOnMobile ? { display: 'none' } : undefined}>
         <div className="section">
           <ImagePreview fullImageSrc="/images/word2a.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
@@ -829,7 +839,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="sectionrow">
+      <div className="sectionrow" style={isMobile && !showSectionCardsOnMobile ? { display: 'none' } : undefined}>
         <div className="section">
           <ImagePreview fullImageSrc="/images/word3a.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
@@ -915,7 +925,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="sectionrow">
+      <div className="sectionrow" style={isMobile && !showSectionCardsOnMobile ? { display: 'none' } : undefined}>
         <div className="section">
           <ImagePreview fullImageSrc="/images/word5.webp" mobileEnabled={isMobile}>
             <div className="image-wrapper">
@@ -1001,7 +1011,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="sectionrowtext">
+      <div className="sectionrowtext" style={isMobile && !showSectionCardsOnMobile ? { display: 'none' } : undefined}>
         <h2>The Bond Add In for Microsoft Word</h2>
         <p>
           The revolutionary new interface for Word. The fastest way to access commands with your keyboard. A classic
