@@ -1361,3 +1361,19 @@
         line-height: 1.3;
     }
 }
+
+/* ============================================
+   SWIPE GESTURE INTEGRATION (MOBILE ONLY)
+   ============================================ */
+
+/* Enable touch scrolling while allowing horizontal swipes */
+@media only screen and (max-width: 1151px) {
+
+    .carousel-mobile .carousel-container,
+    .sectionhead .carousel-container {
+        touch-action: pan-y;
+        /* Allow vertical scroll, enable horizontal swipe detection */
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}

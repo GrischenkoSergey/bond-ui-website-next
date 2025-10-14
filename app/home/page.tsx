@@ -7,6 +7,7 @@ import Layout from "@/components/Layout"
 import ImagePreview from "@/components/ImagePreview"
 import CarouselImagePreview from "@/components/CarouselImagePreview"
 import { useIsMobile } from '@/hooks/use-mobile'
+import { useSwipeableCarousel } from '@/hooks/use-swipeable-mobile'
 
 const Home = () => {
   const carouselSlides = [
@@ -196,6 +197,19 @@ const Home = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const sectionIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const preloadedImagesRef = useRef<Set<string>>(new Set())
+
+  // Swipe handlers for mobile carousels - disabled in preview mode
+  const mobileSwipeHandlers = useSwipeableCarousel({
+    enabled: isMobile && !isPreviewActive,
+    onSwipeLeft: () => nextSlide(),
+    onSwipeRight: () => prevSlide(),
+  })
+
+  const sectionSwipeHandlers = useSwipeableCarousel({
+    enabled: isMobile && !isPreviewActive,
+    onSwipeLeft: () => nextSectionSlide(),
+    onSwipeRight: () => prevSectionSlide(),
+  })
 
   const showSlide = useCallback((index: number) => {
     setCurrent(index)
@@ -581,7 +595,7 @@ const Home = () => {
             </div>
           )}
 
-          <div className="carousel-container">
+          <div className="carousel-container" {...mobileSwipeHandlers}>
             <div className="carousel-track">
               {mobileSlides.map((slide, index) => (
                 <div
@@ -692,7 +706,7 @@ const Home = () => {
             </div>
           )}
 
-          <div className="carousel-container">
+          <div className="carousel-container" {...sectionSwipeHandlers}>
             <div className="carousel-track">
               {sectionCarouselSlides.map((slide, index) => (
                 <div
@@ -845,7 +859,7 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="/images/advancedfind.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/advancedfind.avifs" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
@@ -873,7 +887,7 @@ const Home = () => {
         </div>
 
         <div className="section">
-          <ImagePreview fullImageSrc="/images/qcbaddcommand2.gif" previewId="preview-container2" mobileEnabled={isMobile}>
+          <ImagePreview fullImageSrc="/images/qcbaddcommand2.avifs" previewId="preview-container2" mobileEnabled={isMobile}>
             <div className="image-wrapper">
               <div className="image-container">
                 <Image
