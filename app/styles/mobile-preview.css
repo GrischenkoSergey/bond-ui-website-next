@@ -1,0 +1,37 @@
+/* ============================================
+   MOBILE PREVIEW FIXES FOR iOS SAFARI
+   Ensures preview overlays appear above carousel
+   ============================================ */
+
+/* Force new stacking context at body level for portal */
+#section-carousel-preview {
+    position: fixed !important;
+    z-index: 10000 !important;
+    /* Force hardware acceleration on iOS */
+    transform: translate(-50%, -50%) translateZ(0) !important;
+    -webkit-transform: translate(-50%, -50%) translateZ(0) !important;
+    will-change: transform;
+    /* Prevent iOS Safari compositing issues */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Ensure backdrop is also in correct stacking order */
+#section-carousel-preview-backdrop {
+    position: fixed !important;
+    z-index: 9999 !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Prevent carousel containers from creating conflicting stacking contexts on iOS */
+@supports (-webkit-touch-callout: none) {
+
+    /* iOS Safari specific */
+    .carousel-mobile,
+    .section-carousel,
+    #mobile-view {
+        /* Don't create new stacking context */
+        isolation: auto !important;
+    }
+}

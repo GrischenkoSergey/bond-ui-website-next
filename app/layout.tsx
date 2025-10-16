@@ -13,6 +13,7 @@ import "./styles/typography.css"
 import "./styles/components.css"
 import "./styles/theme.css"
 import "./styles/carousel.css"
+import "./styles/mobile-preview.css" // iOS Safari preview fixes
 import "./styles/devices.css" // Media queries should be loaded last
 
 export const metadata: Metadata = {
