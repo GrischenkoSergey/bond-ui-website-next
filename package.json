@@ -6,7 +6,9 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "warm-cache": "node scripts/warm-image-cache.js",
+    "start:prod": "next build && next start & sleep 3 && npm run warm-cache"
   },
   "dependencies": {
     "@vercel/analytics": "latest",
@@ -14,7 +16,8 @@
     "next-themes": "latest",
     "react": "^18",
     "react-dom": "^18",
-    "react-swipeable": "^7.0.2"
+    "react-swipeable": "^7.0.2",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@eslint/js": "latest",

@@ -18,6 +18,18 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Minimum cache time for optimized images (1 year)
     minimumCacheTTL: 31536000,
+    // Loader configuration for standalone builds
+    loader: 'default',
+    // Cache optimized images on disk (persistent across restarts)
+    disableStaticImages: false,
+    // Reduce concurrent image optimization to improve startup time
+    dangerouslyAllowSVG: false,
+    contentDispositionType: 'inline',
+  },
+  // Improve development server startup
+  experimental: {
+    // Optimize package imports for faster builds
+    optimizePackageImports: ['react-swipeable', 'next-themes'],
   },
   output: 'standalone',
 };

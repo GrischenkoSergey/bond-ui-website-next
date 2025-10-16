@@ -5,6 +5,13 @@ FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Install build dependencies for sharp
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    vips-dev
+
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml* ./
@@ -31,6 +38,9 @@ RUN pnpm build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Install runtime dependencies for sharp
+RUN apk add --no-cache vips
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -42,6 +52,15 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+# Copy cache warming and verification scripts
+COPY --from=builder /app/scripts ./scripts
+COPY docker-entrypoint.sh ./docker-entrypoint.sh
+
+# Make scripts executable, create cache directory, and verify all images
+RUN chmod +x scripts/verify-all-images.sh docker-entrypoint.sh && \
+    mkdir -p .next/cache/images && \
+    scripts/verify-all-images.sh
 
 # Set correct permissions
 RUN chown -R nextjs:nodejs /app
@@ -55,5 +74,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the application
-CMD ["node", "server.js"]
+# Start the application with cache warming
+ENTRYPOINT ["./docker-entrypoint.sh"]
