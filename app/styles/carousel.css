@@ -1476,7 +1476,8 @@
     left: 50% !important;
     transform: translateX(-50%) !important;
     margin: 0 !important;
-    padding: 6px 12px !important;
+    padding: 6px 14px !important;
+    min-width: fit-content !important;
     background: rgba(0, 0, 0, 0.25) !important;
     border-radius: 16px !important;
     backdrop-filter: blur(4px) !important;
@@ -1497,6 +1498,21 @@
     backface-visibility: hidden;
     transform: translateZ(0);
     will-change: auto;
+}
+
+/* Multi-carousel progress dots sizing - match section carousel */
+.multi-carousel-container .react-multi-carousel-dot-list button.progress-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
+}
+
+.multi-carousel-container .react-multi-carousel-dot-list button.progress-dot.active {
+    width: 24px !important;
+    border-radius: 6px !important;
+    min-width: 24px !important;
 }
 
 /* Override react-multi-carousel default list height */

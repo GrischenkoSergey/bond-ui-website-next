@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
+import CarouselImagePreview from "@/components/CarouselImagePreview"
 import type { SectionSlide } from "../data/carousel-data"
 
 interface MultiCarouselProps {
@@ -114,17 +115,19 @@ export default function MultiCarousel({ slides }: MultiCarouselProps) {
                             }}
                                 className="multi-carousel-image-container"
                             >
-                                <img
-                                    src={`/${slide.thumbnail || slide.image}`}
-                                    alt={slide.title}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        display: 'block',
-                                        objectFit: 'cover',
-                                        objectPosition: 'top left'
-                                    }}
-                                />
+                                <CarouselImagePreview fullImageSrc={`/${slide.image}`}>
+                                    <img
+                                        src={`/${slide.thumbnail || slide.image}`}
+                                        alt={slide.title}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            display: 'block',
+                                            objectFit: 'cover',
+                                            objectPosition: 'top left'
+                                        }}
+                                    />
+                                </CarouselImagePreview>
                             </div>
 
                             {/* Description section - matching section carousel style */}
