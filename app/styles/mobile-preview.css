@@ -132,3 +132,27 @@
         transform: translateZ(0);
     }
 }
+
+/* ============================================
+   ANDROID OPTIMIZATIONS
+   Fix progress dots alignment issue
+   ============================================ */
+
+/* Detect Android browsers (not iOS) */
+@supports not (-webkit-touch-callout: none) {
+
+    /* Fix progress dots centering - preserve original transform */
+    .carousel-progress-mobile {
+        /* Keep original centering transform, add z-axis for GPU */
+        transform: translateX(-50%) translateZ(0) !important;
+        -webkit-transform: translateX(-50%) translateZ(0) !important;
+    }
+
+    /* Enable smooth scrolling on Android */
+    body {
+        /* Enable momentum scrolling */
+        -webkit-overflow-scrolling: touch;
+        /* Reduce scroll bounce */
+        overscroll-behavior-y: contain;
+    }
+}
