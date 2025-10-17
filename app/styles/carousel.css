@@ -752,7 +752,6 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        display: block;
         transition: opacity 1s ease;
         display: flex;
         justify-content: center;
@@ -1385,11 +1384,38 @@
 .multi-carousel-container {
     position: relative !important;
     padding: 0 !important;
+    /* Enable hardware acceleration for smooth animations */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Enable smooth touch scrolling on the carousel list */
+.multi-carousel-container .react-multi-carousel-list {
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    min-height: 80vh;
+    list-style: none;
+}
+
+/* Optimize carousel track performance */
+.multi-carousel-container .react-multi-carousel-track {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .multi-carousel-item {
-    padding: 0 !important;
-    height: auto !important;
+    padding: 0;
+    height: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 /* Arrow buttons styling */
@@ -1409,6 +1435,7 @@
 
 .multi-carousel-container .react-multiple-carousel__arrow::before {
     font-size: 18px;
+    font-weight: bold;
     color: #fff;
 }
 
@@ -1453,69 +1480,121 @@
 
     .multi-carousel-container .react-multiple-carousel__arrow::before {
         font-size: 14px;
+        font-weight: bold;
     }
 }
 
 /* Multi-carousel description dark mode support */
 .dark .multi-carousel-description {
-    background-color: #28013e !important;
+    background-color: #28013e;
 }
 
 .dark .multi-carousel-description h3 {
-    color: rgb(255, 255, 102) !important;
+    color: rgb(255, 255, 102);
 }
 
 .dark .multi-carousel-description p {
-    color: oklch(0.985 0 0) !important;
+    color: oklch(0.985 0 0);
 }
 
 /* Position dots at bottom center of the entire carousel */
 .multi-carousel-container .react-multi-carousel-dot-list {
-    position: absolute !important;
-    bottom: 220px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    margin: 0 !important;
-    padding: 6px 14px !important;
-    min-width: fit-content !important;
-    background: rgba(0, 0, 0, 0.25) !important;
-    border-radius: 16px !important;
-    backdrop-filter: blur(4px) !important;
-    display: flex !important;
-    gap: 8px !important;
-    z-index: 160 !important;
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 6px 14px;
+    min-width: fit-content;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+    display: flex;
+    gap: 8px;
+    z-index: 160;
 }
 
 /* Multi-carousel description section styling to match section carousel */
 .multi-carousel-description {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    min-height: 200px !important;
+    min-height: 200px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Multi-carousel image container to fill space */
+.multi-carousel-image-container {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
 .multi-carousel-image-container img {
     backface-visibility: hidden;
     transform: translateZ(0);
     will-change: auto;
+    pointer-events: none;
+    /* Prevent image drag interference during swipe */
+}
+
+/* Allow clicking through to preview on tap (not during drag) */
+.multi-carousel-image-container>div {
+    pointer-events: auto;
 }
 
 /* Multi-carousel progress dots sizing - match section carousel */
 .multi-carousel-container .react-multi-carousel-dot-list button.progress-dot {
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 50% !important;
-    min-width: 10px !important;
-    min-height: 10px !important;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    min-width: 10px;
+    min-height: 10px;
 }
 
 .multi-carousel-container .react-multi-carousel-dot-list button.progress-dot.active {
-    width: 24px !important;
-    border-radius: 6px !important;
-    min-width: 24px !important;
+    width: 24px;
+    border-radius: 6px;
+    min-width: 24px;
 }
 
-/* Override react-multi-carousel default list height */
-.multi-carousel-container .react-multi-carousel-list {
-    min-height: 80vh !important;
+/* Remove focus outline and any default indicators */
+.multi-carousel-container *:focus,
+.multi-carousel-container *:focus-visible,
+.multi-carousel-wrapper *:focus,
+.multi-carousel-wrapper *:focus-visible {
+    outline: none;
+}
+
+/* Remove any list styling that might create dots */
+.multi-carousel-wrapper ul,
+.multi-carousel-wrapper li,
+.multi-carousel-container ul,
+.multi-carousel-container li {
+    list-style: none;
+    list-style-type: none;
+}
+
+/* Remove any pseudo-elements that might be creating dots */
+.multi-carousel-wrapper *::before,
+.multi-carousel-wrapper *::after,
+.multi-carousel-container *::before,
+.multi-carousel-container *::after {
+    display: none;
+}
+
+/* Restore arrow pseudo-elements - more specific selector wins */
+.multi-carousel-container .react-multiple-carousel__arrow::before,
+.multi-carousel-container .react-multiple-carousel__arrow::after {
+    display: block;
+}
+
+/* Hide multi-carousel on desktop */
+@media only screen and (min-width: 1152px) {
+    .multi-carousel-wrapper {
+        display: none;
+    }
 }

@@ -19,6 +19,9 @@ export interface HomePageConfig {
     autoPlay: boolean                          // Enable auto-play for carousels
     autoPlayInterval: number                   // Auto-play interval in milliseconds
     showSectionCardsOnMobile: boolean         // Show static section cards on mobile
+    showMobileCarousel: boolean                // Show main mobile carousel (custom implementation)
+    showSectionCarousel: boolean               // Show section carousel (features)
+    showMultiCarousel: boolean                 // Show multi-carousel (react-multi-carousel)
     mobileCarouselControls: CarouselControls  // Mobile carousel UI controls
     sectionCarouselControls: CarouselControls // Section carousel UI controls
 }
@@ -30,6 +33,7 @@ export interface HomePageConfig {
  * - Set autoPlay to false to disable automatic sliding
  * - Adjust autoPlayInterval to change slide duration (in ms)
  * - Set showSectionCardsOnMobile to true to show static cards below carousel on mobile
+ * - Toggle individual carousels with showMobileCarousel, showSectionCarousel, showMultiCarousel
  * - Customize UI controls for each carousel independently
  */
 export const homePageConfig: HomePageConfig = {
@@ -42,6 +46,11 @@ export const homePageConfig: HomePageConfig = {
     // Note: The section CAROUSEL is always visible on mobile
     // When false: Hides the duplicate static section cards grid below the carousel
     showSectionCardsOnMobile: false,
+
+    // Carousel visibility toggles (mobile only)
+    showMobileCarousel: true,      // Show main mobile carousel (custom implementation)
+    showSectionCarousel: true,     // Show section carousel (features)
+    showMultiCarousel: false,        // Show multi-carousel (react-multi-carousel library)
 
     // Mobile carousel UI controls (main carousel on mobile)
     mobileCarouselControls: {

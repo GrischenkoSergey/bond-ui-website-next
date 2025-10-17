@@ -33,6 +33,7 @@ import MultiCarousel from "./components/MultiCarousel"
  * - Desktop carousel with thumbnails
  * - Mobile-optimized carousel with swipe gestures
  * - Section features carousel (mobile only)
+ * - Multi-carousel (react-multi-carousel library)
  * - Static section cards grid (configurable on mobile)
  */
 export default function Home() {
@@ -40,6 +41,9 @@ export default function Home() {
     autoPlay,
     autoPlayInterval,
     showSectionCardsOnMobile,
+    showMobileCarousel,
+    showSectionCarousel,
+    showMultiCarousel,
     mobileCarouselControls,
     sectionCarouselControls
   } = homePageConfig
@@ -138,7 +142,7 @@ export default function Home() {
       )}
 
       {/* Mobile Carousel */}
-      {isMobile && (
+      {isMobile && showMobileCarousel && (
         <MobileCarousel
           slides={mobileSlides}
           current={mainCarousel.current}
@@ -158,8 +162,8 @@ export default function Home() {
       {/* Buy Now Bar */}
       <BuyNowBar />
 
-      {/* Section Features Carousel - Mobile Only - Always visible on mobile */}
-      {isMobile && (
+      {/* Section Features Carousel - Mobile Only - Conditional visibility */}
+      {isMobile && showSectionCarousel && (
         <SectionCarousel
           slides={sectionCarouselSlides}
           current={sectionCarousel.current}
@@ -177,8 +181,8 @@ export default function Home() {
         />
       )}
 
-      {/* Multi-item Carousel - Shows multiple cards in a row */}
-      <MultiCarousel slides={sectionCarouselSlides} />
+      {/* Multi-item Carousel - Shows multiple cards in a row - Conditional visibility */}
+      {showMultiCarousel && <MultiCarousel slides={sectionCarouselSlides} />}
 
       {/* Static Section Cards Grid - Controlled visibility on mobile */}
       <SectionCards

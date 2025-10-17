@@ -56,7 +56,7 @@ export default function MultiCarousel({ slides }: MultiCarouselProps) {
     }
 
     return (
-        <div style={{
+        <div className="multi-carousel-wrapper" style={{
             width: '100%',
             margin: '40px auto',
             padding: '0 0px',
@@ -73,13 +73,14 @@ export default function MultiCarousel({ slides }: MultiCarouselProps) {
                 flexDirection: 'column'
             }}>
                 <Carousel
+                    ssr={true}
                     responsive={responsive}
                     infinite={true}
                     autoPlay={true}
                     autoPlaySpeed={9000}
                     keyBoardControl={true}
-                    customTransition="transform 600ms ease-in-out"
-                    transitionDuration={600}
+                    customTransition="transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                    transitionDuration={400}
                     containerClass="multi-carousel-container"
                     removeArrowOnDeviceType={[]}
                     dotListClass="carousel-progress-mobile"
@@ -90,8 +91,10 @@ export default function MultiCarousel({ slides }: MultiCarouselProps) {
                     arrows={true}
                     swipeable={true}
                     draggable={true}
+                    minimumTouchDrag={80}
                     beforeChange={(nextSlide) => setCurrentSlide(nextSlide)}
                     afterChange={(currentSlide) => setCurrentSlide(currentSlide)}
+                    pauseOnHover={true}
                 >
                     {slides.map((slide, index) => (
                         <div
