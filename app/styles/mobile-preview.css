@@ -34,4 +34,101 @@
         /* Don't create new stacking context */
         isolation: auto !important;
     }
+
+    /* iOS Safari smooth overlay effect - no fade out, only fade in */
+    /* Force hardware acceleration and proper compositing for carousel slides */
+    .carousel-mobile .carousel-track .slide,
+    .carousel-mobile .carousel-track .fade {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        perspective: 1000;
+        /* Disable transition to prevent fade out - we only want fade in */
+        transition: none !important;
+        -webkit-transition: none !important;
+    }
+
+    /* iOS-specific fade-in animation for smooth overlay */
+    @keyframes fadeInOverlayIOS {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+    }
+
+    /* Apply fade-in animation ONLY to active slides - higher specificity */
+    .carousel-mobile .carousel-track .slide.fade.active,
+    .carousel-mobile .carousel-track .fade.active,
+    .carousel-mobile .carousel-track .slide.active {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* REMOVE opacity: 1 !important - let animation control it! */
+        /* Smooth fade-in animation for new slide appearing on top */
+        animation: fadeInOverlayIOS 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+        -webkit-animation: fadeInOverlayIOS 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+        animation-fill-mode: both !important;
+        -webkit-animation-fill-mode: both !important;
+        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+        /* Active slide on top for overlay effect */
+        z-index: 3 !important;
+    }
+
+    /* Inactive slides stay visible at full opacity underneath */
+    .carousel-mobile .carousel-track .slide:not(.active),
+    .carousel-mobile .carousel-track .fade:not(.active) {
+        /* Keep at full opacity - don't fade out! */
+        opacity: 1 !important;
+        /* Behind the active slide */
+        z-index: 2 !important;
+        /* Keep pointer events disabled on inactive slides */
+        pointer-events: none !important;
+        /* Hide after the new slide fully fades in */
+        visibility: hidden;
+        transition: visibility 0s 1.2s !important;
+        -webkit-transition: visibility 0s 1.2s !important;
+    }
+
+    /* Keep the previous slide visible during transition */
+    .carousel-mobile .carousel-track .slide:not(.active):nth-last-child(2),
+    .carousel-mobile .carousel-track .fade:not(.active):nth-last-child(2) {
+        visibility: visible !important;
+        transition: none !important;
+        -webkit-transition: none !important;
+    }
+
+    /* Force compositing layer for carousel track on iOS */
+    .carousel-track {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    /* Ensure images inside slides use hardware acceleration */
+    .slide img,
+    .slide>div {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    /* Prevent Next.js Image component from causing repaints on iOS */
+    .slide img[loading],
+    .slide img[decoding] {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
 }
