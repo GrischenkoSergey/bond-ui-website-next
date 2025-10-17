@@ -9,6 +9,7 @@ export interface UseCarouselProps {
     autoPlay: boolean
     autoPlayInterval: number
     isPreviewActive: boolean
+    isScrolling?: boolean  // Optional: pause during scroll
 }
 
 export interface UseCarouselReturn {
@@ -33,6 +34,7 @@ export function useCarousel({
     autoPlay,
     autoPlayInterval,
     isPreviewActive,
+    isScrolling = false,  // Default to false for backward compatibility
 }: UseCarouselProps): UseCarouselReturn {
     const [current, setCurrent] = useState(0)
     const [isPaused, setIsPaused] = useState(false)
@@ -69,9 +71,10 @@ export function useCarousel({
         }
     }, [autoPlay, isPreviewActive])
 
-    // Auto-play functionality with pause support
+    // Auto-play functionality with pause support (includes scroll pause)
     useEffect(() => {
-        if (!autoPlay || totalSlides <= 1 || isPaused || isPreviewActive) {
+        // Pause if: auto-play disabled, only 1 slide, manually paused, preview active, or scrolling
+        if (!autoPlay || totalSlides <= 1 || isPaused || isPreviewActive || isScrolling) {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current)
                 intervalRef.current = null
@@ -87,7 +90,7 @@ export function useCarousel({
                 intervalRef.current = null
             }
         }
-    }, [autoPlay, autoPlayInterval, nextSlide, totalSlides, isPaused, isPreviewActive])
+    }, [autoPlay, autoPlayInterval, nextSlide, totalSlides, isPaused, isPreviewActive, isScrolling])
 
     return {
         current,
@@ -206,4 +209,44 @@ export function usePreviewMode() {
     }, [])
 
     return isPreviewActive
+}
+
+/**
+ * Scroll detection for pausing carousel during scroll
+ * Improves performance on Android devices by pausing auto-play while scrolling
+ */
+export function useScrollPause() {
+    const [isScrolling, setIsScrolling] = useState(false)
+    const scrollTimerRef = useRef<NodeJS.Timeout | null>(null)
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const handleScroll = () => {
+            // Set scrolling state to true
+            setIsScrolling(true)
+
+            // Clear existing timer
+            if (scrollTimerRef.current) {
+                clearTimeout(scrollTimerRef.current)
+            }
+
+            // Set timer to detect when scrolling stops
+            scrollTimerRef.current = setTimeout(() => {
+                setIsScrolling(false)
+            }, 150) // Resume 150ms after scroll stops
+        }
+
+        // Listen to scroll events
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            if (scrollTimerRef.current) {
+                clearTimeout(scrollTimerRef.current)
+            }
+        }
+    }, [])
+
+    return isScrolling
 }
