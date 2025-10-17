@@ -1377,3 +1377,129 @@
         user-select: none;
     }
 }
+
+/* ============================================
+   MULTI-CAROUSEL STYLES (react-multi-carousel)
+   ============================================ */
+
+.multi-carousel-container {
+    position: relative !important;
+    padding: 0 !important;
+}
+
+.multi-carousel-item {
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* Arrow buttons styling */
+.multi-carousel-container .react-multiple-carousel__arrow {
+    background: rgba(0, 0, 0, 0.5);
+    min-width: 43px;
+    min-height: 43px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.multi-carousel-container .react-multiple-carousel__arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+}
+
+.multi-carousel-container .react-multiple-carousel__arrow::before {
+    font-size: 18px;
+    color: #fff;
+}
+
+.multi-carousel-container .react-multiple-carousel__arrow--left {
+    left: 15px;
+}
+
+.multi-carousel-container .react-multiple-carousel__arrow--right {
+    right: 15px;
+}
+
+/* Dots styling */
+.custom-dot-list-style {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.custom-dot-list-style button {
+    border: none;
+    background: #ddd;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-dot-list-style .react-multi-carousel-dot--active button {
+    background: #00d084;
+    width: 12px;
+    height: 12px;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+    .multi-carousel-container .react-multiple-carousel__arrow {
+        min-width: 35px;
+        min-height: 35px;
+    }
+
+    .multi-carousel-container .react-multiple-carousel__arrow::before {
+        font-size: 14px;
+    }
+}
+
+/* Multi-carousel description dark mode support */
+.dark .multi-carousel-description {
+    background-color: #28013e !important;
+}
+
+.dark .multi-carousel-description h3 {
+    color: rgb(255, 255, 102) !important;
+}
+
+.dark .multi-carousel-description p {
+    color: oklch(0.985 0 0) !important;
+}
+
+/* Position dots at bottom center of the entire carousel */
+.multi-carousel-container .react-multi-carousel-dot-list {
+    position: absolute !important;
+    bottom: 220px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    padding: 6px 12px !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(4px) !important;
+    display: flex !important;
+    gap: 8px !important;
+    z-index: 160 !important;
+}
+
+/* Multi-carousel description section styling to match section carousel */
+.multi-carousel-description {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    min-height: 200px !important;
+}
+
+/* Multi-carousel image container to fill space */
+.multi-carousel-image-container img {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: auto;
+}
+
+/* Override react-multi-carousel default list height */
+.multi-carousel-container .react-multi-carousel-list {
+    min-height: 80vh !important;
+}

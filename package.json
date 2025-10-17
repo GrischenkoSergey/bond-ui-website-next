@@ -16,6 +16,7 @@
     "next-themes": "latest",
     "react": "^18",
     "react-dom": "^18",
+    "react-multi-carousel": "^2.8.6",
     "react-swipeable": "^7.0.2",
     "sharp": "^0.33.5"
   },

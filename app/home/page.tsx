@@ -24,6 +24,7 @@ import MobileCarousel from "./components/MobileCarousel"
 import BuyNowBar from "./components/BuyNowBar"
 import SectionCarousel from "./components/SectionCarousel"
 import SectionCards from "./components/SectionCards"
+import MultiCarousel from "./components/MultiCarousel"
 
 /**
  * Homepage - Bond UI Website
@@ -175,6 +176,9 @@ export default function Home() {
           onGoToSlide={sectionCarousel.goToSlide}
         />
       )}
+
+      {/* Multi-item Carousel - Shows multiple cards in a row */}
+      <MultiCarousel slides={sectionCarouselSlides} />
 
       {/* Static Section Cards Grid - Controlled visibility on mobile */}
       <SectionCards

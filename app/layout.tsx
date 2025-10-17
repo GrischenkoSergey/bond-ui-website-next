@@ -12,6 +12,7 @@ import "./styles/layout.css"
 import "./styles/typography.css"
 import "./styles/components.css"
 import "./styles/theme.css"
+import "react-multi-carousel/lib/styles.css" // Import react-multi-carousel styles
 import "./styles/carousel.css"
 import "./styles/mobile-preview.css" // iOS Safari preview fixes
 import "./styles/devices.css" // Media queries should be loaded last
